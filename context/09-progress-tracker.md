@@ -43,3 +43,4 @@ Living checklist. Update after every feature. Agents read this early each sessio
 | 2026-08-11 | Architect feature page-parity + SkillUI 7-page extract | Lock Community A/B/C → go / pipeline |
 | 2026-08-11 | Phase 4: auth 2-col, community C hybrid, listing chrome | Optional: re-SkillUI recipes; imprint |
 | 2026-08-11 | Imprint + remember; recipes featured/rows from live IA | Commit/PR when asked |
+| 2026-08-11 | git init + initial commit (screens gitignored) | Optional: remote + PR |
