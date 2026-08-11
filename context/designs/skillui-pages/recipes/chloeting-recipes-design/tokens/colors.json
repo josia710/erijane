@@ -1,0 +1,96 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "core": {
+    "text-primary": {
+      "value": "#000000",
+      "role": "text-primary"
+    },
+    "border": {
+      "value": "#303033",
+      "role": "border",
+      "name": "color-primary"
+    },
+    "background": {
+      "value": "#ffffff",
+      "role": "background",
+      "name": "theme-color"
+    },
+    "surface": {
+      "value": "#fff2f0",
+      "role": "surface",
+      "name": "highlight-color"
+    },
+    "accent": {
+      "value": "#40a9ff",
+      "role": "accent"
+    },
+    "text-muted": {
+      "value": "#868a93",
+      "role": "text-muted",
+      "name": "color-secondary"
+    }
+  },
+  "status": {
+    "danger": {
+      "value": "#ff4d4f",
+      "role": "danger"
+    },
+    "warning": {
+      "value": "#faad14",
+      "role": "warning"
+    },
+    "success": {
+      "value": "#52c41a",
+      "role": "success"
+    }
+  },
+  "extended": {
+    "anchor-hover-color": {
+      "value": "#1890ff",
+      "role": "info",
+      "name": "anchor-hover-color"
+    },
+    "color-d9d9d9": {
+      "value": "#d9d9d9",
+      "role": "unknown"
+    },
+    "color-096dd9": {
+      "value": "#096dd9",
+      "role": "unknown"
+    },
+    "color-light-blue": {
+      "value": "#e6f7ff",
+      "role": "unknown",
+      "name": "color-light-blue"
+    },
+    "base-color": {
+      "value": "#f0f0f0",
+      "role": "unknown",
+      "name": "base-color"
+    },
+    "color-ff7875": {
+      "value": "#ff7875",
+      "role": "unknown"
+    },
+    "color-d9363e": {
+      "value": "#d9363e",
+      "role": "unknown"
+    },
+    "color-eb2f96": {
+      "value": "#eb2f96",
+      "role": "unknown"
+    },
+    "color-feffe6": {
+      "value": "#feffe6",
+      "role": "unknown"
+    },
+    "color-fadb14": {
+      "value": "#fadb14",
+      "role": "unknown"
+    }
+  },
+  "meta": {
+    "theme": "light",
+    "extracted": "2026-08-11"
+  }
+}

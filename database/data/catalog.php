@@ -1,0 +1,108 @@
+<?php
+
+/**
+ * Seed-only catalog fixtures. Public site reads Eloquent — not this file at runtime.
+ */
+return [
+    'programs' => [
+        [
+            'slug' => '2026-pilates-challenge',
+            'title' => '2026 Pilates Challenge',
+            'badge' => 'NEW',
+            'tone' => 'mint',
+            'weeks' => 4,
+            'level' => 'Beginner',
+            'focus' => 'Core',
+            'image' => 'images/chloe/programs/2026-pilates-banner.jpeg',
+        ],
+        [
+            'slug' => '2026-summer-shred',
+            'title' => '2026 Summer Shred Challenge',
+            'badge' => 'NEW',
+            'tone' => 'lavender',
+            'weeks' => 5,
+            'level' => 'Intermediate',
+            'focus' => 'Full Body',
+            'image' => 'images/chloe/programs/2026-summer-shred-banner.jpeg',
+        ],
+        [
+            'slug' => '2026-get-toned',
+            'title' => '2026 Get Toned Challenge',
+            'badge' => null,
+            'tone' => 'sky',
+            'weeks' => 4,
+            'level' => 'Beginner',
+            'focus' => 'Tone',
+            'image' => 'images/chloe/programs/2026-get-toned-banner.jpeg',
+        ],
+        [
+            'slug' => 'hourglass',
+            'title' => 'Hourglass Challenge',
+            'badge' => null,
+            'tone' => 'peach',
+            'weeks' => 2,
+            'level' => 'Intermediate',
+            'focus' => 'Lower Body',
+            'image' => 'images/chloe/programs/program-001.jpeg',
+        ],
+        [
+            'slug' => 'two-week-shred',
+            'title' => 'Two Week Shred Challenge',
+            'badge' => null,
+            'tone' => 'mint',
+            'weeks' => 2,
+            'level' => 'Advanced',
+            'focus' => 'HIIT',
+            'image' => 'images/chloe/programs/program-002.jpeg',
+        ],
+        [
+            'slug' => 'booty',
+            'title' => 'Booty Building Program',
+            'badge' => null,
+            'tone' => 'lavender',
+            'weeks' => 3,
+            'level' => 'Beginner',
+            'focus' => 'Lower Body',
+            'image' => 'images/chloe/programs/program-003.jpeg',
+        ],
+    ],
+
+    'videos' => [
+        ['slug' => 'abs-hiit', 'title' => 'Abs HIIT Workout', 'date' => '24th Jun 26', 'duration' => '15 min', 'category' => 'Abs', 'image' => 'images/chloe/videos/abs-booty-live.webp'],
+        ['slug' => 'full-body-burn', 'title' => 'Full Body Burn', 'date' => '22nd Jun 26', 'duration' => '25 min', 'category' => 'Full Body', 'image' => 'images/chloe/videos/full-body-pilates-live.jpeg'],
+        ['slug' => 'pilates-core', 'title' => 'Pilates Core Flow', 'date' => '17th Jun 26', 'duration' => '20 min', 'category' => 'Pilates', 'image' => 'images/chloe/videos/pilates-hiit-live.webp'],
+        ['slug' => 'hiit-cardio', 'title' => 'HIIT Cardio Workout', 'date' => '12th Jun 26', 'duration' => '18 min', 'category' => 'Cardio', 'image' => 'images/chloe/videos/full-body-pilates.jpeg'],
+        ['slug' => 'lower-body', 'title' => 'Lower Body Strength', 'date' => '8th Jun 26', 'duration' => '30 min', 'category' => 'Lower Body', 'image' => 'images/chloe/videos/abs-booty.webp'],
+        ['slug' => 'stretch', 'title' => 'Full Body Stretch', 'date' => '3rd Jun 26', 'duration' => '12 min', 'category' => 'Recovery', 'image' => 'images/chloe/videos/pilates-hiit.webp'],
+    ],
+
+    'recipes' => [
+        ['slug' => 'protein-bowl', 'title' => 'High Protein Power Bowl', 'category' => 'High Protein', 'time' => '20 min', 'tone' => 'peach', 'image' => 'images/chloe/recipes/high-protein-square.webp'],
+        ['slug' => 'low-carb-wrap', 'title' => 'Low Carb Chicken Wrap', 'category' => 'Low Carb', 'time' => '15 min', 'tone' => 'mint', 'image' => 'images/chloe/recipes/low-carb-square.webp'],
+        ['slug' => 'dairy-free-smoothie', 'title' => 'Dairy Free Berry Smoothie', 'category' => 'Dairy Free', 'time' => '5 min', 'tone' => 'lavender', 'image' => 'images/chloe/recipes/dairy-free-square.webp'],
+        ['slug' => 'veggie-stir', 'title' => 'Vegetarian Stir Fry', 'category' => 'Vegetarian', 'time' => '25 min', 'tone' => 'sky', 'image' => 'images/chloe/recipes/vegetarian-square.webp'],
+        ['slug' => 'overnight-oats', 'title' => 'Protein Overnight Oats', 'category' => 'High Protein', 'time' => '10 min', 'tone' => 'peach', 'image' => 'images/chloe/recipes/berries-yogurt-parfait-1677185494994-cover.webp'],
+        ['slug' => 'zucchini-noodles', 'title' => 'Zucchini Noodle Bowl', 'category' => 'Low Carb', 'time' => '18 min', 'tone' => 'mint', 'image' => 'images/chloe/recipes/baked-spaghetti-squash-1666685687820-cover.webp'],
+        ['slug' => 'matcha-latte', 'title' => 'Vegan Matcha Latte', 'category' => 'Dairy Free', 'time' => '8 min', 'tone' => 'lavender', 'image' => 'images/chloe/recipes/best-vegan-matcha-latte-1676539049230-cover.webp'],
+        ['slug' => 'chickpea-burgers', 'title' => 'Chickpea Burgers', 'category' => 'Vegetarian', 'time' => '30 min', 'tone' => 'sky', 'image' => 'images/chloe/recipes/chickpea-burgers-1682320652289-cover.webp'],
+        ['slug' => 'sweet-potato-pancakes', 'title' => 'Chocolate Sweet Potato Pancakes', 'category' => 'High Protein', 'time' => '25 min', 'tone' => 'peach', 'image' => 'images/chloe/recipes/chocolate-sweet-potato-pancakes-1684296229539-cover.webp'],
+        ['slug' => 'banana-pancakes', 'title' => 'Banana Oatmeal Pancakes', 'category' => 'Vegetarian', 'time' => '20 min', 'tone' => 'mint', 'image' => 'images/chloe/recipes/banana-oatmeal-pancakes-1673229768508-cover.webp'],
+        ['slug' => 'berry-salad', 'title' => 'Berry Burrata Salad', 'category' => 'Low Carb', 'time' => '15 min', 'tone' => 'lavender', 'image' => 'images/chloe/recipes/berry-burrata-salad-1676269531692-cover.webp'],
+        ['slug' => 'gimbap', 'title' => 'Bulgogi Beef Gimbap', 'category' => 'High Protein', 'time' => '35 min', 'tone' => 'sky', 'image' => 'images/chloe/recipes/bulgogi-beef-gimbap-korean-seaweed-rice-rolls-1676440072283-cover.webp'],
+    ],
+
+    'store' => [
+        ['slug' => 'tee-classic', 'title' => 'Matcha Tank', 'price' => 35, 'category' => 'Apparel', 'tone' => 'sky', 'image' => 'images/chloe/store/matcha-tank-1.1f8f8f7a.jpg', 'line' => 'women'],
+        ['slug' => 'hoodie', 'title' => 'Peach Sweater', 'price' => 65, 'category' => 'Apparel', 'tone' => 'lavender', 'image' => 'images/chloe/store/peach-sweater-1.d191a488.jpg', 'line' => 'women'],
+        ['slug' => 'bottle', 'title' => 'Peach Crop Top', 'price' => 28, 'category' => 'Apparel', 'tone' => 'mint', 'image' => 'images/chloe/store/peach-croptop-1.dc67243d.jpg', 'line' => 'women'],
+        ['slug' => 'mat', 'title' => 'Black Crop Top', 'price' => 48, 'category' => 'Apparel', 'tone' => 'peach', 'image' => 'images/chloe/store/blackcrop.a9e0787d.jpg', 'line' => 'women'],
+        ['slug' => 'cap', 'title' => 'Black Joggers', 'price' => 22, 'category' => 'Apparel', 'tone' => 'sky', 'image' => 'images/chloe/store/blackjoggers.09b6575b.jpg', 'line' => 'men'],
+        ['slug' => 'band-set', 'title' => 'Cream Crop Top', 'price' => 32, 'category' => 'Apparel', 'tone' => 'lavender', 'image' => 'images/chloe/store/cream-croptop-1.f5b00a69.jpg', 'line' => 'women'],
+        ['slug' => 'black-jumper', 'title' => 'Black Sweater', 'price' => 58, 'category' => 'Apparel', 'tone' => 'mint', 'image' => 'images/chloe/store/blackjumper.ae80cdca.jpg', 'line' => 'men'],
+        ['slug' => 'black-tank', 'title' => 'Black Tank', 'price' => 30, 'category' => 'Apparel', 'tone' => 'peach', 'image' => 'images/chloe/store/blacktank.ee1120e1.jpg', 'line' => 'men'],
+        ['slug' => 'cream-jumper', 'title' => 'Cream Jumper', 'price' => 55, 'category' => 'Apparel', 'tone' => 'sky', 'image' => 'images/chloe/store/cream-jumper-1.93cc88e4.jpg', 'line' => 'women'],
+        ['slug' => 'cream-shorts', 'title' => 'Cream Shorts', 'price' => 36, 'category' => 'Apparel', 'tone' => 'lavender', 'image' => 'images/chloe/store/cream-shorts.402f1470.jpg', 'line' => 'women'],
+        ['slug' => 'matcha-crop', 'title' => 'Matcha Crop Top', 'price' => 29, 'category' => 'Apparel', 'tone' => 'mint', 'image' => 'images/chloe/store/matcha-croptop-1.121dfacd.jpg', 'line' => 'women'],
+        ['slug' => 'matcha-joggers', 'title' => 'Matcha Joggers', 'price' => 48, 'category' => 'Apparel', 'tone' => 'peach', 'image' => 'images/chloe/store/matcha-jogger-1.164c6be2.jpg', 'line' => 'men'],
+    ],
+];

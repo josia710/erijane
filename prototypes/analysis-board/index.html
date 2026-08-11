@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chloe pixel-match — Analysis board (PROTOTYPE)</title>
+  <style>
+    :root { --bg:#0f1218; --ink:#e8eaef; --muted:#9aa3b2; --p0:#ff5c5c; --p1:#f0a202; --p2:#5b8def; --new:#7dcea0; --panel:#171b24; --card:#1e2430; --line:#2a3140; }
+    * { box-sizing: border-box; }
+    body { margin:0; font:14px/1.45 ui-sans-serif,system-ui,sans-serif; background:var(--bg); color:var(--ink); }
+    header { padding:16px 20px; border-bottom:1px solid var(--line); display:flex; gap:16px; align-items:baseline; flex-wrap:wrap; }
+    header h1 { font-size:16px; margin:0; font-weight:650; }
+    header p { margin:0; color:var(--muted); font-size:12px; }
+    .badge { font-size:10px; letter-spacing:.04em; text-transform:uppercase; border:1px solid var(--line); padding:2px 8px; border-radius:999px; color:var(--muted); }
+    .board { display:grid; grid-template-columns:repeat(4,minmax(200px,1fr)); gap:12px; padding:16px; min-height:60vh; }
+    .lane { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px; min-height:420px; }
+    .lane h2 { margin:0 0 10px; font-size:12px; text-transform:uppercase; letter-spacing:.06em; }
+    .lane.p0 h2 { color:var(--p0); } .lane.p1 h2 { color:var(--p1); } .lane.p2 h2 { color:var(--p2); } .lane.new h2 { color:var(--new); }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin-bottom:8px; cursor:pointer; }
+    .card:hover, .card.active { border-color:#6b7cff; }
+    .card h3 { margin:0 0 4px; font-size:13px; font-weight:600; }
+    .card .path { color:var(--muted); font-size:11px; word-break:break-all; }
+    .drawer { position:fixed; top:0; right:0; width:min(420px,100%); height:100%; background:var(--panel); border-left:1px solid var(--line); padding:18px; transform:translateX(100%); transition:transform .2s ease; overflow:auto; z-index:20; }
+    .drawer.open { transform:translateX(0); }
+    .drawer h2 { margin:0 0 8px; font-size:16px; }
+    .drawer pre { background:#0c0f14; border:1px solid var(--line); border-radius:8px; padding:10px; font-size:11px; overflow:auto; color:#c9d1e0; }
+    .drawer .close { float:right; background:transparent; border:1px solid var(--line); color:var(--ink); border-radius:8px; padding:4px 10px; cursor:pointer; }
+    .tickets { padding:0 16px 24px; }
+    .ticket { border:1px solid var(--line); border-radius:10px; padding:12px; margin:8px 0; background:var(--panel); }
+    .ticket button { margin:4px 6px 0 0; background:#243049; color:var(--ink); border:1px solid var(--line); border-radius:8px; padding:6px 10px; cursor:pointer; }
+    .ticket button.picked { border-color:var(--new); background:#1d3a2a; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chloe Ting clone — pixel-match analysis</h1>
+    <span class="badge">PROTOTYPE — throwaway</span>
+    <p>A+B chrome: severity swimlanes + companion drawer. Live: Next.js + ant-carousel/slick. Local: Blade + empty app.js.</p>
+  </header>
+  <div class="board" id="board"></div>
+  <section class="tickets" id="tickets"></section>
+  <aside class="drawer" id="drawer">
+    <button class="close" id="close">Close</button>
+    <h2 id="d-title">Select a finding</h2>
+    <p id="d-note" style="color:var(--muted)"></p>
+    <p class="path" id="d-path"></p>
+    <h3 style="font-size:12px;color:var(--muted);margin-top:16px">STATE dump</h3>
+    <pre id="d-state"></pre>
+  </aside>
+  <script>
+    const FINDINGS = [
+      { id:'F1', sev:'P0', title:'No real carousel — empty app.js', path:'resources/js/app.js:1', note:'Live: ant-carousel + react-slick; mobile peek padding 29%. Local: CSS snap-x only. Councils agree: Embla, ban Ant Design in Laravel.' },
+      { id:'F2', sev:'P0', title:'Hero bg unused — gradient collage instead', path:'config/chloe.php hero_bg + home.blade.php:32', note:'Live desktop hero uses homepage-background-2025 cover. Asset exists locally unused.' },
+      { id:'F3', sev:'P0', title:'DESIGN.md forbids requested motion', path:'DESIGN.md:7-9,49-51', note:'MOTION 3 + hover-only. Gate B must amend §6 before Stage C or executors correctly refuse carousels. Draft in 03-council-merge.md.' },
+      { id:'F3b', sev:'P0', title:'Motion stack mismatch', path:'package.json', note:'Zero carousel deps. Engine: Embla preferred; slick-vanilla OK if CDP feel gap. Ban Ant Design React.' },
+      { id:'F4', sev:'P1', title:'Live hero Poppins vs DESIGN Manrope-only', path:'DESIGN.md:29-32 vs live .bcFjzf', note:'AuthTest bans Poppins. Interview T3: keep Manrope (brand fence) or match live Poppins hero only.' },
+      { id:'F5', sev:'P1', title:'skillui DESIGN noise', path:'design-systems/chloeting-live-design/DESIGN.md', note:'Poppins/#40a9ff Ant leftovers. Root DESIGN.md wins for tokens.' },
+      { id:'F6', sev:'P1', title:'Section hydrate vs always-on', path:'home.blade.php', note:'Live Videos/Recipes/Community hydrate client-side; local always on (IA OK). Confirm desktop merch branch + CTA conditions via CDP.' },
+      { id:'F7', sev:'P1', title:'Auth rate-limit missing', path:'routes/web.php:45-50', note:'Security audit High — throttle login/signup. Separate from pixel wave unless approved.' },
+      { id:'F8', sev:'P2', title:'Auth validation sad paths untested', path:'tests/Feature/AuthTest.php', note:'Testing audit: invalid/empty/duplicate signup+login not asserted.' },
+      { id:'F9', sev:'P2', title:'No Livewire filter / motion tests', path:'components/*/⚡index.blade.php', note:'Listing filters + carousel parity invisible to CI.' },
+      { id:'F10', sev:'NEW', title:'Plan MCP + board server flaky', path:'user-plan / :8766', note:'Local plan.mdx + this board. Restart via cmd if pwsh ENOENT.' },
+      { id:'F11', sev:'NEW', title:'Erijane brand fence', path:'DESIGN.md:59-65', note:'Keep wordmark + footer disclaimer. No Chloe trademark swap.' }
+    ];
+    const TICKETS = [
+      { id:'T1', q:'Scope for this execute wave?', opts:['Home only (structure+carousel+motion)','Home + store listing','All marketing pages'], links:['F1','F2','F3','F6'] },
+      { id:'T2', q:'Carousel implementation?', opts:['Embla (default)','slick-vanilla if CDP needs it','Swiper','CSS snap only (accept delta)'], links:['F1','F3','F3b'] },
+      { id:'T3', q:'Hero typography?', opts:['Keep Manrope (DESIGN/AuthTest)','Poppins hero only to match live','CDP re-measure then decide'], links:['F4','F5'] },
+      { id:'T4', q:'Amend DESIGN.md §6 motion dial for home?', opts:['Yes — MOTION 5 home / keep listings at 3','Yes — MOTION 5 sitewide','No — keep hover-only (blocks goal)'], links:['F3'] }
+    ];
+    const answers = JSON.parse(sessionStorage.getItem('answers')||'{}');
+    let selected = null;
+    const board = document.getElementById('board');
+    ['P0','P1','P2','NEW'].forEach(sev => {
+      const lane = document.createElement('div');
+      lane.className = 'lane ' + sev.toLowerCase();
+      lane.innerHTML = `<h2>${sev}</h2>`;
+      FINDINGS.filter(f => f.sev === sev).forEach(f => {
+        const c = document.createElement('div');
+        c.className = 'card'; c.dataset.id = f.id;
+        c.innerHTML = `<h3>${f.id}: ${f.title}</h3><div class="path">${f.path}</div>`;
+        c.onclick = () => openFinding(f, c);
+        lane.appendChild(c);
+      });
+      board.appendChild(lane);
+    });
+    const ticketsEl = document.getElementById('tickets');
+    ticketsEl.innerHTML = '<h2 style="font-size:13px;color:var(--muted)">Wayfinder tickets (HITL)</h2>';
+    TICKETS.forEach(t => {
+      const el = document.createElement('div');
+      el.className = 'ticket';
+      el.innerHTML = `<strong>${t.id}</strong> — ${t.q}<div class="opts"></div><div style="color:var(--muted);font-size:11px;margin-top:6px">Links: ${t.links.join(', ')}</div>`;
+      const opts = el.querySelector('.opts');
+      t.opts.forEach(o => {
+        const b = document.createElement('button');
+        b.textContent = o;
+        if (answers[t.id] === o) b.classList.add('picked');
+        b.onclick = () => { answers[t.id]=o; sessionStorage.setItem('answers', JSON.stringify(answers)); [...opts.children].forEach(x=>x.classList.remove('picked')); b.classList.add('picked'); dump(); };
+        opts.appendChild(b);
+      });
+      ticketsEl.appendChild(el);
+    });
+    function openFinding(f, card) {
+      selected = f.id;
+      document.querySelectorAll('.card').forEach(c => c.classList.toggle('active', c.dataset.id===f.id));
+      document.getElementById('drawer').classList.add('open');
+      document.getElementById('d-title').textContent = f.id + ': ' + f.title;
+      document.getElementById('d-note').textContent = f.note;
+      document.getElementById('d-path').textContent = f.path;
+      dump();
+    }
+    function dump() {
+      const state = { selected, answers, next: answers.T1 && answers.T2 ? 'Ready for Gate B approval → Stage C' : 'Pick T1–T3 on board', gates: { pest: 'php artisan test --filter=RouteSmokeTest', build: 'npm run build' } };
+      document.getElementById('d-state').textContent = JSON.stringify(state, null, 2);
+    }
+    document.getElementById('close').onclick = () => document.getElementById('drawer').classList.remove('open');
+    dump();
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "core": {
+    "text-primary": {
+      "value": "#303033",
+      "role": "text-primary"
+    },
+    "background": {
+      "value": "#ffffff",
+      "role": "background"
+    },
+    "text-muted": {
+      "value": "#868a93",
+      "role": "text-muted"
+    },
+    "accent": {
+      "value": "#c1ebe6",
+      "role": "accent"
+    },
+    "surface": {
+      "value": "#edfefc",
+      "role": "surface"
+    }
+  },
+  "status": {
+    "danger": {
+      "value": "#e4485b",
+      "role": "danger"
+    }
+  },
+  "extended": {
+    "color-000000": {
+      "value": "#000000",
+      "role": "unknown"
+    },
+    "color-1890ff": {
+      "value": "#1890ff",
+      "role": "info"
+    },
+    "color-c4c4c4": {
+      "value": "#c4c4c4",
+      "role": "unknown"
+    },
+    "color-eff0f4": {
+      "value": "#eff0f4",
+      "role": "unknown"
+    },
+    "color-e3e4eb": {
+      "value": "#e3e4eb",
+      "role": "unknown"
+    }
+  },
+  "meta": {
+    "theme": "light",
+    "extracted": "2026-08-11"
+  }
+}
