@@ -13,26 +13,22 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Erijane Admin',
-            'email' => 'admin@erijane.test',
-            'password' => 'password',
-            'role' => UserRole::Admin,
-        ]);
+        $accounts = [
+            ['email' => 'admin@erijane.test', 'name' => 'Erijane Admin', 'role' => UserRole::Admin],
+            ['email' => 'editor@erijane.test', 'name' => 'Erijane Editor', 'role' => UserRole::Editor],
+            ['email' => 'test@example.com', 'name' => 'Test Member', 'role' => UserRole::Member],
+        ];
 
-        User::factory()->create([
-            'name' => 'Erijane Editor',
-            'email' => 'editor@erijane.test',
-            'password' => 'password',
-            'role' => UserRole::Editor,
-        ]);
-
-        User::factory()->create([
-            'name' => 'Test Member',
-            'email' => 'test@example.com',
-            'password' => 'password',
-            'role' => UserRole::Member,
-        ]);
+        foreach ($accounts as $account) {
+            User::query()->updateOrCreate(
+                ['email' => $account['email']],
+                [
+                    'name' => $account['name'],
+                    'password' => 'password',
+                    'role' => $account['role'],
+                ]
+            );
+        }
 
         $this->call([
             CatalogSeeder::class,
