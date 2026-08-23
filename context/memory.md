@@ -1,5 +1,5 @@
 # Memory — Erijane
-Updated: 2026-08-22
+Updated: 2026-08-23
 
 ## Current state
 - Phases 1–4 complete: Filament CMS + catalog + site chrome + listing/auth/community parity wave
@@ -7,6 +7,7 @@ Updated: 2026-08-22
 - Visual ref: Chloe Ting IA; curated `DESIGN.md` beats SkillUI Ant/Poppins
 - App promo hero is an 8-layer stacked PNG collage (live `/program` positions), not a single phone image
 - Listing chrome icons use measured live `/program` sizes via `.ui-icon--chevron|search|filters|meta-cal|meta-clock|social`
+- Home featured recipe must tolerate empty catalog (`$recipes->first()` + `@if ($featured)`); production 500 was null array offset on `sweet-potato-pancakes`
 
 ## Decisions (durable)
 - Catalog-only store — no payments (Decision 1)

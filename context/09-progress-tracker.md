@@ -59,3 +59,4 @@ Living checklist. Update after every feature. Agents read this early each sessio
 | 2026-08-22 | Listing rails: fluid fit at lg+ so rightmost cards never clip (recipes 4 / programs+videos 5) | Commit/PR when asked |
 | 2026-08-22 | App-promo hero: stacked live collage (8 PNGs, 719×572) on home + `/programs` | Commit/PR when asked |
 | 2026-08-22 | Shared listing icons match live `/program` sizes (`.ui-icon--*`) across programs/videos/recipes/community + footer socials | Commit/PR when asked |
+| 2026-08-23 | Home no longer 500s when no published recipes (`$featured` null guard) | Deploy to erijane.minfinnovations.com |

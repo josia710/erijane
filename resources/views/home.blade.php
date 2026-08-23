@@ -133,8 +133,7 @@
 
 {{-- Recipes --}}
 @php
-    $featured = \App\Models\Recipe::query()->published()->where('slug', 'sweet-potato-pancakes')->first()
-        ?? $recipes->first();
+    $featured = $recipes->first();
     $recipeCats = [
         ['label' => 'High Protein Recipes', 'cat' => 'High Protein', 'thumb' => 'images/chloe/recipes/high-protein-square.webp'],
         ['label' => 'Low Carb Recipes', 'cat' => 'Low Carb', 'thumb' => 'images/chloe/recipes/low-carb-square.webp'],
@@ -148,8 +147,8 @@
             <h2 class="section-title">Recipes</h2>
             <a href="{{ route('recipes') }}" class="btn-ghost">View More Recipes</a>
         </div>
-        <div class="grid items-center gap-10 lg:grid-cols-2">
-            {{-- Featured recipe --}}
+        <div @class(['grid items-center gap-10', 'lg:grid-cols-2' => $featured])>
+            @if ($featured)
             <a href="{{ route('recipes.show', $featured['slug']) }}" class="group flex items-center gap-5 sm:gap-6">
                 <img src="{{ asset($featured['image']) }}" alt="{{ $featured['title'] }}" class="h-40 w-40 shrink-0 rounded-2xl object-cover shadow-sm sm:h-48 sm:w-48">
                 <div>
@@ -163,6 +162,7 @@
                     </span>
                 </div>
             </a>
+            @endif
             {{-- Category list --}}
             <div class="divide-y divide-gray-200">
                 @foreach ($recipeCats as $rc)

@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\Recipe;
 use Database\Seeders\CatalogSeeder;
 use Database\Seeders\SiteContentSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class RouteSmokeTest extends TestCase
@@ -37,7 +39,7 @@ class RouteSmokeTest extends TestCase
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('routesProvider')]
+    #[DataProvider('routesProvider')]
     public function test_route_returns_ok(string $uri): void
     {
         $this->get($uri)->assertOk();
@@ -56,5 +58,12 @@ class RouteSmokeTest extends TestCase
     public function test_admin_login_page_is_reachable(): void
     {
         $this->get('/admin/login')->assertOk();
+    }
+
+    public function test_home_ok_when_no_published_recipes(): void
+    {
+        Recipe::query()->update(['published_at' => null]);
+
+        $this->get('/')->assertOk();
     }
 }
