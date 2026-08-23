@@ -8,6 +8,7 @@ use App\Models\Recipe;
 use App\Models\User;
 use Database\Seeders\CatalogSeeder;
 use Database\Seeders\DatabaseSeeder;
+use Database\Seeders\SiteContentSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -33,6 +34,18 @@ class CatalogCmsTest extends TestCase
         $this->get('/')->assertOk();
     }
 
+    public function test_home_renders_catalog_image_urls(): void
+    {
+        $this->seed(CatalogSeeder::class);
+        $this->seed(SiteContentSeeder::class);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('images/chloe/programs/2026-pilates-banner.jpeg', false)
+            ->assertSee('images/chloe/recipes/high-protein-square.webp', false)
+            ->assertSee('images/chloe/hero/chloeting-banner.e2207dc5.png', false);
+    }
+
     public function test_seeded_catalog_images_exist_on_disk(): void
     {
         $catalog = require database_path('data/catalog.php');
@@ -41,6 +54,10 @@ class CatalogCmsTest extends TestCase
             foreach ($catalog[$group] as $row) {
                 $this->assertFileExists(public_path($row['image']), $row['image']);
             }
+        }
+
+        foreach ((require database_path('data/site_defaults.php'))['assets'] as $path) {
+            $this->assertFileExists(public_path($path), $path);
         }
     }
 

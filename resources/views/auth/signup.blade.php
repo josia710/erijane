@@ -58,7 +58,7 @@
         </div>
 
         <button type="button" class="auth-oauth" disabled aria-disabled="true">
-            <img src="{{ asset('images/chloe/ui/google.png') }}" alt="" class="h-5 w-5" width="20" height="20">
+            <img src="{{ \App\Support\Media::url('images/chloe/ui/google.png') }}" alt="" class="h-5 w-5" width="20" height="20">
             Sign up with Google
         </button>
 

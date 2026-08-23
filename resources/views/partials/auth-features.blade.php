@@ -36,7 +36,7 @@
                     <p class="font-display text-sm font-semibold text-ink">{{ $feature['title'] }}</p>
                     <p class="mt-1 text-xs leading-relaxed text-ink/70">{{ $feature['body'] }}</p>
                 </div>
-                <img src="{{ asset($feature['image']) }}" alt="" class="auth-feature__img" loading="lazy">
+                <img src="{{ \App\Support\Media::url($feature['image'] ?? null) }}" alt="" class="auth-feature__img" loading="lazy">
             </div>
         @endforeach
     </div>

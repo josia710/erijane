@@ -24,7 +24,7 @@
             <a href="{{ route('programs.show', $program['slug']) }}" class="group cursor-pointer">
                 <div class="overflow-hidden rounded-3xl card-tone-{{ $program['tone'] }}">
                     <div class="h-72 overflow-hidden">
-                        <img src="{{ asset($program['image']) }}" alt="{{ $program['title'] }}" class="h-full w-full object-cover object-top transition duration-200 group-hover:scale-[1.03]">
+                        <img src="{{ \App\Support\Media::url($program['image'] ?? null) }}" alt="{{ \App\Support\Media::alt($program['title'] ?? null, 'Program') }}" class="h-full w-full object-cover object-top transition duration-200 group-hover:scale-[1.03]">
                     </div>
                 </div>
                 <div class="mt-3 flex items-center gap-2">
@@ -72,8 +72,8 @@
                         <a href="{{ route('videos.show', $video['slug']) }}" class="group block cursor-pointer">
                             <div class="videos-carousel__thumb">
                                 <img
-                                    src="{{ asset($video['image']) }}"
-                                    alt="{{ $video['title'] }}"
+                                    src="{{ \App\Support\Media::url($video['image'] ?? null) }}"
+                                    alt="{{ \App\Support\Media::alt($video['title'] ?? null, 'Workout video') }}"
                                     class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
                                     width="640"
                                     height="360"
@@ -122,7 +122,7 @@
                 @foreach ($store as $item)
                     <div class="embla__slide">
                         <a href="{{ route('store.show', $item['slug']) }}" class="group block cursor-pointer">
-                            <img src="{{ asset($item['image']) }}" alt="{{ $item['title'] }}" class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]" width="300" height="399">
+                            <img src="{{ \App\Support\Media::url($item['image'] ?? null) }}" alt="{{ \App\Support\Media::alt($item['title'] ?? null, 'Product') }}" class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]" width="300" height="399">
                         </a>
                     </div>
                 @endforeach
@@ -150,7 +150,7 @@
         <div @class(['grid items-center gap-10', 'lg:grid-cols-2' => $featured])>
             @if ($featured)
             <a href="{{ route('recipes.show', $featured['slug']) }}" class="group flex items-center gap-5 sm:gap-6">
-                <img src="{{ asset($featured['image']) }}" alt="{{ $featured['title'] }}" class="h-40 w-40 shrink-0 rounded-2xl object-cover shadow-sm sm:h-48 sm:w-48">
+                <img src="{{ \App\Support\Media::url($featured['image'] ?? null) }}" alt="{{ \App\Support\Media::alt($featured['title'] ?? null, 'Recipe') }}" class="h-40 w-40 shrink-0 rounded-2xl object-cover shadow-sm sm:h-48 sm:w-48">
                 <div>
                     <span class="inline-block rounded bg-mint px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-teal-800">Latest Recipe</span>
                     <h3 class="mt-3 font-display text-xl font-semibold leading-snug text-ink sm:text-2xl">{{ $featured['title'] }}</h3>
@@ -167,7 +167,7 @@
             <div class="divide-y divide-gray-200">
                 @foreach ($recipeCats as $rc)
                     <a href="{{ route('recipes', ['category' => $rc['cat']]) }}" class="group flex items-center gap-4 py-3.5">
-                        <img src="{{ asset($rc['thumb']) }}" alt="{{ $rc['label'] }}" class="h-12 w-12 shrink-0 rounded-lg object-cover">
+                        <img src="{{ \App\Support\Media::url($rc['thumb']) }}" alt="{{ $rc['label'] }}" class="h-12 w-12 shrink-0 rounded-lg object-cover">
                         <span class="font-display text-sm font-semibold text-ink group-hover:underline">{{ $rc['label'] }}</span>
                         <svg class="ml-auto h-4 w-4 text-muted transition group-hover:text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
                     </a>

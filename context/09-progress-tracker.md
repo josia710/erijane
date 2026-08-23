@@ -61,3 +61,5 @@ Living checklist. Update after every feature. Agents read this early each sessio
 | 2026-08-22 | Shared listing icons match live `/program` sizes (`.ui-icon--*`) across programs/videos/recipes/community + footer socials | Commit/PR when asked |
 | 2026-08-23 | Home no longer 500s when no published recipes (`$featured` null guard) | Deploy to erijane.minfinnovations.com |
 | 2026-08-23 | `DatabaseSeeder` idempotent (`updateOrCreate` users); catalog+images re-seedable | On prod: `php artisan db:seed` + deploy `public/images` |
+| 2026-08-23 | Fetched live Chloe page images (`scripts/fetch-chloe-images.php`) into `public/images/chloe/cdn` | Commit CDN dump only if you want ~136MB in git |
+| 2026-08-23 | Wired catalog/CDN images through `Media::url` on home/hero/auth/about; mapper copies largest real WebP onto catalog dests | Optional: commit mapper; skip committing `public/images/chloe/cdn` |

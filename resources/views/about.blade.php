@@ -54,7 +54,7 @@
                 <div class="about-awards__grid">
                     <div class="about-awards__art">
                         <img
-                            src="{{ asset('images/chloe/ui/chloeting-clapping.3227cd05.svg') }}"
+                            src="{{ \App\Support\Media::url('images/chloe/ui/chloeting-clapping.3227cd05.svg') }}"
                             alt=""
                             class="about-awards__art-img"
                         >
