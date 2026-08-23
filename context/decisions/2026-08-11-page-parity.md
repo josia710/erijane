@@ -16,7 +16,7 @@ Live: `/c/fitness-discussions` = forums chrome. Local: `/community` = CTA stub (
 | **B** | Build forums **UI shell** (thread list chrome, no real backend) |
 | **C** | Hybrid: CTA hero + forums-looking cards below (shell) |
 
-**Status:** **locked C** (2026-08-11) — CTA hero + forums-looking cards (UI shell only; no real threads/backend)
+**Status:** **locked C** (2026-08-11) — CTA hero on **home**; `/community` follows live `/c/fitness-discussions` forums chrome (UI shell only; no real threads/backend). 2026-08-22: community route is forums-first (live URL), not CTA+forums stacked.
 
 ## Forbidden
 - Real Google OAuth / payment / copyrighted streams

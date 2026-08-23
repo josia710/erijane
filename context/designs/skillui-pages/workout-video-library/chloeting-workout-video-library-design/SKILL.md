@@ -5,13 +5,29 @@ description: Design system skill for chloeting-workout-video-library. Activate w
 
 # chloeting-workout-video-library Design System
 
-You are building UI for **chloeting-workout-video-library**. Light-themed, cool palette, sans-serif typography (Poppins), compact density on a 4px grid, expressive motion.
+You are matching **https://chloeting.com/workout-video-library** (Workout Videos listing), not the homepage.
+
+**Start here (2026-08-22):** `references/LIVE_CAPTURE_2026-08-22.md` + `screens/live-2026-08-22/`. Older embeds below (homepage.png, mixed home/login pages) are stale SkillUI crawl leftovers — do not implement from them.
+
+UI type is **Manrope**. This page has **no H1 and no app-promo hero**. Do not use Ant `#40a9ff` as brand.
 
 ## Visual Reference
 
 **IMPORTANT**: Study ALL screenshots below before writing any UI. Match colors, typography, spacing, layout, and motion exactly as shown.
 
-### Homepage
+### Live /workout-video-library (2026-08-22)
+
+![Toolbar 1440](screens/live-2026-08-22/01-hero-1440.png)
+
+![Latest featured](screens/live-2026-08-22/02-latest-featured-1440.png)
+
+![Filters](screens/live-2026-08-22/05-filters-open-1440.png)
+
+![Browse](screens/live-2026-08-22/06-browse-dropdown-1440.png)
+
+![Mobile 390](screens/live-2026-08-22/08-mobile-390.png)
+
+### Stale SkillUI homepage embed (ignore)
 
 ![chloeting-workout-video-library Homepage](screenshots/homepage.png)
 
@@ -55,8 +71,9 @@ This package includes extended documentation. **Read these files before implemen
 
 | File | Contents |
 |------|----------|
+| `references/LIVE_CAPTURE_2026-08-22.md` | **START HERE** — measured live /workout-video-library layout, type, colors |
 | `references/DESIGN.md` | Full design system tokens, colors, typography, spacing |
-| `references/VISUAL_GUIDE.md` | **START HERE** — Master visual guide with all screenshots embedded |
+| `references/VISUAL_GUIDE.md` | Older SkillUI visual guide (mixed URLs — verify against live capture) |
 | `references/ANIMATIONS.md` | CSS keyframes, scroll triggers, motion library stack, video specs |
 | `references/LAYOUT.md` | Flex/grid containers, page structure, spacing relationships |
 | `references/COMPONENTS.md` | DOM component patterns, HTML structure, class fingerprints |
@@ -65,13 +82,12 @@ This package includes extended documentation. **Read these files before implemen
 
 ## Design Philosophy
 
-- **Layered depth** — use shadow tokens to create a sense of physical layering. Each elevation level has a specific shadow.
-- **Gradient accents** — gradients are used thoughtfully for emphasis, not decoration.
-- **Type pairing** — Poppins for body/UI text, Manrope for headings/display. Never introduce a third typeface.
-- **compact density** — 4px base grid. Every dimension is a multiple of 4.
-- **cool palette** — the color temperature runs cool, matching the sans-serif typography.
-- **Restrained accent** — `#40a9ff` is the only pop of color. Used exclusively for CTAs, links, focus rings, and active states.
-- **Expressive motion** — animations are an integral part of the experience. Use spring physics and layout animations.
+- **Manrope UI** — nav, cards, filters, H2/titles. No Poppins on this listing.
+- **No hero** — toolbar sits under the 56px header; do not copy the `/program` app-promo band here.
+- **Favorites muted** — `#c4c4c4` until signed in. Dark `#303033` pills for Log In / open Filters / open Browse.
+- **Latest is 737 / 232 / 232** landscape cards, then collection rows of five 232px thumbs — not programs’ 736/484 portrait split.
+- **Six filter columns** — Focus Area · Workout Type · Preference · Duration · Equipment · History.
+- **Filter Ant blues** (`#40a9ff`, `#1890ff`) — never as Erijane brand; curated tokens win for chrome.
 
 ## Color System
 

@@ -5,13 +5,29 @@ description: Design system skill for chloeting-recipes. Activate when building U
 
 # chloeting-recipes Design System
 
-You are building UI for **chloeting-recipes**. Light-themed, cool palette, sans-serif typography (Poppins), compact density on a 4px grid, expressive motion.
+You are matching **https://chloeting.com/recipes** (Recipes listing), not the homepage.
+
+**Start here (2026-08-22):** `references/LIVE_CAPTURE_2026-08-22.md` + `screens/live-2026-08-22/`. Older embeds below (homepage.png, mixed food-blog OCR) are stale SkillUI crawl leftovers — do not implement from them.
+
+UI type is **Manrope**. This page has **no H1 and no app-promo hero**. Do not use Ant `#40a9ff` as brand.
 
 ## Visual Reference
 
 **IMPORTANT**: Study ALL screenshots below before writing any UI. Match colors, typography, spacing, layout, and motion exactly as shown.
 
-### Homepage
+### Live /recipes (2026-08-22)
+
+![Toolbar 1440](screens/live-2026-08-22/01-hero-1440.png)
+
+![Latest featured](screens/live-2026-08-22/02-latest-featured-1440.png)
+
+![Filters](screens/live-2026-08-22/05-filters-open-1440.png)
+
+![Browse](screens/live-2026-08-22/06-browse-dropdown-1440.png)
+
+![Mobile 390](screens/live-2026-08-22/09-mobile-390.png)
+
+### Stale SkillUI homepage embed (ignore)
 
 ![chloeting-recipes Homepage](screenshots/homepage.png)
 
@@ -55,8 +71,9 @@ This package includes extended documentation. **Read these files before implemen
 
 | File | Contents |
 |------|----------|
+| `references/LIVE_CAPTURE_2026-08-22.md` | **START HERE** — measured live /recipes layout, type, colors |
 | `references/DESIGN.md` | Full design system tokens, colors, typography, spacing |
-| `references/VISUAL_GUIDE.md` | **START HERE** — Master visual guide with all screenshots embedded |
+| `references/VISUAL_GUIDE.md` | Older SkillUI visual guide (mixed URLs — verify against live capture) |
 | `references/ANIMATIONS.md` | CSS keyframes, scroll triggers, motion library stack, video specs |
 | `references/LAYOUT.md` | Flex/grid containers, page structure, spacing relationships |
 | `references/COMPONENTS.md` | DOM component patterns, HTML structure, class fingerprints |

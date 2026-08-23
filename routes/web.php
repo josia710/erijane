@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Models\Product;
 use App\Models\Program;
 use App\Models\Recipe;
 use App\Models\Video;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
@@ -39,6 +39,7 @@ Route::get('/store/{product:slug}', function (Product $product) {
 })->name('store.show');
 
 Route::view('/community', 'community')->name('community');
+Route::redirect('/c/fitness-discussions', '/community');
 Route::redirect('/journey', '/login');
 Route::view('/about', 'about')->name('about');
 

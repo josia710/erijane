@@ -52,14 +52,14 @@ class ParityShellTest extends TestCase
             ->assertSee('facebook.com/itschloeting', false);
     }
 
-    public function test_community_page_uses_shared_cta(): void
+    public function test_community_page_matches_forums_chrome(): void
     {
         $this->get('/community')
             ->assertOk()
-            ->assertSee('Get more out of your fitness journey')
-            ->assertSee('Today\'s workout', false)
             ->assertSee('#fitness')
-            ->assertSee('Forum UI shell only', false)
+            ->assertSee('Create Post')
+            ->assertSee('Latest')
+            ->assertSee('Last Active')
             ->assertSee('Welcome to the Erijane community');
     }
 
@@ -82,18 +82,25 @@ class ParityShellTest extends TestCase
     {
         $this->get('/programs')
             ->assertOk()
-            ->assertSee('Search by Collection')
+            ->assertSee('Browse By Collection')
             ->assertSee('Latest Challenges')
+            ->assertSee('Most Popular')
             ->assertSee('View Challenge');
 
         $this->get('/videos')
             ->assertOk()
+            ->assertSee('Browse By Collection')
+            ->assertSee('Favorites')
             ->assertSee('Latest Workouts')
+            ->assertSee('Most Popular')
             ->assertSee('Load More Latest Workouts');
 
         $this->get('/recipes')
             ->assertOk()
+            ->assertSee('Browse By Collection')
+            ->assertSee('Saved Recipes')
             ->assertSee('Latest Recipes')
+            ->assertSee('Popular Categories')
             ->assertSee('Load More Latest Recipes');
 
         $this->get('/about')

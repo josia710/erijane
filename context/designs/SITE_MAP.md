@@ -8,6 +8,16 @@ Skill installs: `~/.cursor/skills/chloeting-design`, `~/.claude/skills/chloeting
 
 Ultra extracts for listing/auth targets (prefer these screens when polishing that route). Each pack: `chloeting-<name>-design/` with `screens/pages/` (3) + `screens/scroll/` (7).
 
+**Programs (2026-08-22):** live listing truth is `skillui-pages/program/chloeting-program-design/references/LIVE_CAPTURE_2026-08-22.md` + `screens/live-2026-08-22/`. Older SkillUI embeds in that pack mixed homepage/login.
+
+**Videos (2026-08-22):** live listing truth is `skillui-pages/workout-video-library/chloeting-workout-video-library-design/references/LIVE_CAPTURE_2026-08-22.md` + `screens/live-2026-08-22/`. No app-promo hero; Favorites + six-column filters; landscape 232px cards. Older SkillUI embeds mixed homepage.
+
+**Recipes (2026-08-22):** live listing truth is `skillui-pages/recipes/chloeting-recipes-design/references/LIVE_CAPTURE_2026-08-22.md` + `screens/live-2026-08-22/`. No app-promo hero; Saved Recipes + five-column filters; Latest 925/293 split then Popular Categories + themed rails. Older SkillUI embeds mixed food-blog OCR.
+
+**Community (2026-08-22):** live forums truth is `skillui-pages/community/chloeting-community-design/references/LIVE_CAPTURE_2026-08-22.md` + `screens/live-2026-08-22/`. No CTA on `/community`; home keeps the marketing CTA. Older SkillUI embeds mixed homepage/login.
+
+**About (2026-08-22):** live page truth is `skillui-pages/about/chloeting-about-design/references/LIVE_CAPTURE_2026-08-22.md`. Hero band + story split + value cards + list + closing. Older SkillUI embeds mixed homepage.
+
 | Page | Pack root | Live URL | Local route |
 |------|-----------|----------|-------------|
 | Programs | `skillui-pages/program/chloeting-program-design/` | https://chloeting.com/program | `/programs` |
@@ -20,7 +30,7 @@ Ultra extracts for listing/auth targets (prefer these screens when polishing tha
 
 Token rule unchanged: **filter Ant** — use curated `DESIGN.md` + `context/06-design-tokens.md` for brand chrome; SkillUI packs = structure/motion/screens.
 
-**Note:** SkillUI ultra screenshots for `/recipes` often mis-capture food-blog chrome. Prefer live HTML structure (Latest Recipes → featured + category rows → Load More) + `skillui-out/.../screens/pages/recipes.png` as secondary. Local `/recipes` follows that IA with Erijane catalog data.
+**Note:** SkillUI ultra screenshots for `/recipes` mis-capture food-blog chrome. Prefer `LIVE_CAPTURE_2026-08-22.md`. Local `/recipes` follows that IA with Erijane catalog data.
 
 Plan: `context/plans/2026-08-11-page-parity.md` · Blind spot: `context/blind-spot-page-parity.md` · Registry: `context/ui-registry.md`
 
@@ -37,7 +47,7 @@ Plan: `context/plans/2026-08-11-page-parity.md` · Blind spot: `context/blind-sp
 | Program detail | `/program/2026/...` | `/programs/{slug}` | `screens/pages/program-2026-*.png` |
 | Videos library | `/workout-video-library` | `/videos` | `screens/pages/workout-video-library.png` |
 | Recipes | `/recipes` | `/recipes` | `screens/pages/recipes.png` |
-| Community | `/c/fitness-discussions` | `/community` | `screens/pages/c-fitness-discussions.png` |
+| Community | `/c/fitness-discussions` | `/community` (redirect from live path) | `screens/live-2026-08-22/` |
 | About | `/about` | `/about` | `screens/pages/about.png` |
 | Privacy | `/privacy-policy` | _(legal, Phase 3)_ | `screens/pages/privacy-policy.png` |
 | Terms | `/term-conditions` | _(legal, Phase 3)_ | `screens/pages/term-conditions.png` |

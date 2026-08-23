@@ -5,7 +5,9 @@ description: Design system skill for chloeting-about. Activate when building UI 
 
 # chloeting-about Design System
 
-You are building UI for **chloeting-about**. Light-themed, cool palette, sans-serif typography (Poppins), compact density on a 4px grid, expressive motion.
+You are matching **https://chloeting.com/about**, not the homepage.
+
+**Start here (2026-08-22):** `references/LIVE_CAPTURE_2026-08-22.md`. Older embeds mixed homepage/login. Filter Ant / award-blue; curated tokens win for brand chrome.
 
 ## Visual Reference
 

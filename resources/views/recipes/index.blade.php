@@ -3,7 +3,7 @@
 @section('title', 'Recipes - Erijane')
 
 @section('content')
-<div class="site-container py-12">
+<div class="bg-surface">
     <livewire:recipes.index />
 </div>
 @endsection

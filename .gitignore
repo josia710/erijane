@@ -26,7 +26,8 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 
-# SkillUI ultra screenshots / packs are large local refs (see SITE_MAP.md)
+# Local tooling
+.tools/
 context/designs/skillui-out/**/screens/
 context/designs/skillui-pages/**/screens/
 context/designs/**/*.skill

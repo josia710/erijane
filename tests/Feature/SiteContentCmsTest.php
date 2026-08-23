@@ -43,12 +43,13 @@ class SiteContentCmsTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSee('Available Now')
+            ->assertSee('hero-collage', false)
             ->assertSee('Affordable fitness apparel', false);
     }
 
-    public function test_community_uses_cms_features(): void
+    public function test_home_uses_cms_community_features(): void
     {
-        $this->get('/community')
+        $this->get('/')
             ->assertOk()
             ->assertSee('Get more out of your fitness journey')
             ->assertSee('Personal daily workout schedule');

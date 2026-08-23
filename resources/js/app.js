@@ -92,6 +92,28 @@ function initHomeCarousels() {
     });
 }
 
+function initHeroBannerParallax() {
+    const banner = document.querySelector('[data-hero-banner]');
+    const stage = document.querySelector('[data-hero-collage]');
+    if (!banner || !stage || prefersReducedMotion()) {
+        return;
+    }
+
+    const max = 10;
+    window.addEventListener(
+        'mousemove',
+        (event) => {
+            const box = stage.getBoundingClientRect();
+            if (box.height === 0) {
+                return;
+            }
+            const y = ((event.clientY - box.top) / box.height - 0.5) * -max;
+            banner.style.transform = `translateY(${y.toFixed(3)}px) translateZ(0)`;
+        },
+        { passive: true },
+    );
+}
+
 function initHomeReveals() {
     if (prefersReducedMotion()) {
         document.querySelectorAll('.home-reveal').forEach((el) => el.classList.add('is-visible'));
@@ -126,4 +148,5 @@ function initHomeReveals() {
 document.addEventListener('DOMContentLoaded', () => {
     initHomeCarousels();
     initHomeReveals();
+    initHeroBannerParallax();
 });

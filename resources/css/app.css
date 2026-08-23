@@ -42,6 +42,10 @@
         font-family: var(--font-display);
     }
 
+    [x-cloak] {
+        display: none !important;
+    }
+
     @media (prefers-reduced-motion: reduce) {
         html {
             scroll-behavior: auto;
@@ -57,6 +61,28 @@
             transform: none !important;
             transition: none !important;
         }
+    }
+}
+
+@keyframes forumMenuIn {
+    from {
+        opacity: 0;
+        transform: scaleY(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+@keyframes forumSearchIn {
+    from {
+        opacity: 0;
+        transform: translateX(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
@@ -133,7 +159,7 @@
         @apply rounded-3xl border border-border bg-white p-6 shadow-sm;
     }
 
-    /* Live desktop hero uses homepage-background-2025 cover */
+    /* Live /program hero: 572px band, stacked PNG collage (measured 2026-08-22). */
     .home-hero {
         background-image: none;
     }
@@ -141,7 +167,139 @@
     @media (min-width: 768px) {
         .home-hero {
             background-image: var(--hero-bg);
+            background-size: cover;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
         }
+    }
+
+    .home-hero__inner {
+        @apply mx-auto flex w-full max-w-[1288px] flex-col items-center gap-8 px-6 py-10;
+    }
+
+    @media (min-width: 1024px) {
+        .home-hero__inner {
+            @apply h-full flex-row items-center justify-around gap-0 py-0;
+        }
+    }
+
+    .home-hero__copy {
+        @apply flex w-full max-w-[360px] flex-col items-start;
+    }
+
+    .home-hero__icon {
+        @apply mb-6 h-[90px] w-[90px] rounded-[1.25rem] object-cover shadow-md;
+    }
+
+    .home-hero__title {
+        @apply mb-2.5 font-display text-[2.25rem] font-semibold leading-[1.2] tracking-[0.01em] text-ink sm:text-[45px] sm:leading-[54px];
+    }
+
+    .home-hero__sub {
+        @apply text-lg leading-[22px] text-muted;
+    }
+
+    .home-hero__stores {
+        @apply mt-10 flex items-center justify-center gap-2;
+    }
+
+    .home-hero__store {
+        @apply h-[51px] w-[176px] max-w-full object-contain;
+    }
+
+    .home-hero__mobile-banner {
+        @apply relative z-10 mx-auto w-52 drop-shadow-2xl sm:w-[280px] lg:hidden;
+    }
+
+    .hero-collage {
+        display: none;
+    }
+
+    @media (min-width: 1024px) {
+        .hero-collage {
+            display: block;
+            position: relative;
+            width: min(719px, 100%);
+            aspect-ratio: 719 / 572;
+            flex-shrink: 1;
+        }
+    }
+
+    .hero-collage__piece {
+        position: absolute;
+    }
+
+    .hero-collage__img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+    }
+
+    .hero-collage__piece--performance {
+        left: 4.87%;
+        top: 6.12%;
+        z-index: 1;
+        width: 81.5%;
+        height: 39.51%;
+    }
+
+    .hero-collage__piece--monitor {
+        left: 6.68%;
+        top: 38.11%;
+        z-index: 2;
+        width: 36.3%;
+        height: 30.24%;
+    }
+
+    .hero-collage__piece--banner {
+        left: 29.49%;
+        top: -2.56%;
+        z-index: 3;
+        width: 47.29%;
+        height: 102.8%;
+        will-change: transform;
+    }
+
+    .hero-collage__piece--connect {
+        left: 61.75%;
+        top: 6.12%;
+        z-index: 4;
+        width: 25.31%;
+        height: 26.22%;
+    }
+
+    .hero-collage__piece--kcal-out {
+        left: 19.47%;
+        top: 8.74%;
+        z-index: 5;
+        width: 20.03%;
+        height: 31.29%;
+    }
+
+    .hero-collage__piece--kcal-in {
+        left: 6.95%;
+        top: 69.06%;
+        z-index: 6;
+        width: 27.82%;
+        height: 29.72%;
+    }
+
+    .hero-collage__piece--organize {
+        left: 59.53%;
+        top: 29.72%;
+        z-index: 7;
+        width: 37.83%;
+        height: 19.58%;
+    }
+
+    .hero-collage__piece--train {
+        left: 57.02%;
+        top: 52.45%;
+        z-index: 8;
+        width: 33.38%;
+        height: 34.79%;
     }
 
     .home-reveal {
@@ -299,6 +457,278 @@
         @apply flex flex-wrap items-center gap-2 rounded-2xl border border-border bg-surface/80 p-3;
     }
 
+    .programs-listing,
+    .videos-listing,
+    .recipes-listing {
+        @apply border-t border-border;
+    }
+
+    .programs-listing > .site-container,
+    .videos-listing > .site-container,
+    .recipes-listing > .site-container,
+    .about-page > .site-container {
+        @apply lg:px-5 xl:px-0;
+    }
+
+    .programs-toolbar {
+        @apply flex flex-wrap items-center gap-3 py-4;
+    }
+
+    /* Live /program icon sizes (measured 2026-08-22 icon-font glyphs). */
+    .ui-icon {
+        @apply shrink-0;
+    }
+
+    .ui-icon--chevron {
+        width: 15px;
+        height: 14px;
+    }
+
+    .ui-icon--search {
+        width: 20px;
+        height: 20px;
+    }
+
+    .ui-icon--filters {
+        width: 22px;
+        height: 22px;
+    }
+
+    .ui-icon--meta-cal {
+        width: 15px;
+        height: 16px;
+    }
+
+    .ui-icon--meta-clock {
+        width: 17px;
+        height: 18px;
+    }
+
+    .ui-icon--social {
+        width: 16px;
+        height: 16px;
+    }
+
+    .programs-browse {
+        @apply inline-flex h-8 items-center gap-1.5 rounded-[20px] bg-border px-3.5 text-sm text-ink transition duration-300;
+    }
+
+    .programs-browse.is-open {
+        @apply bg-pill text-white;
+    }
+
+    .programs-browse-menu {
+        @apply absolute z-30 mt-2 min-w-[14rem] origin-top-left rounded-xl border border-border bg-white py-2 shadow-lg;
+        animation: forumMenuIn 0.3s ease-out;
+    }
+
+    .programs-browse-item {
+        @apply block w-full px-4 py-2 text-left text-sm text-ink hover:bg-surface;
+    }
+
+    .programs-browse-item.is-active {
+        @apply font-semibold;
+    }
+
+    .programs-search {
+        @apply inline-flex max-w-[12rem] items-center gap-2;
+    }
+
+    .programs-search__input {
+        @apply w-24 min-w-0 border-0 bg-transparent text-sm text-ink outline-none placeholder:text-ink md:w-32;
+    }
+
+    .programs-filters-btn {
+        @apply inline-flex items-center gap-1.5 rounded-[15px] px-3.5 py-[5px] text-sm font-medium text-ink transition duration-300;
+    }
+
+    .programs-filters-btn.is-open {
+        @apply bg-pill font-medium text-white;
+    }
+
+    .programs-filters-btn__label {
+        @apply hidden sm:inline;
+    }
+
+    .programs-filters {
+        @apply flex flex-col gap-3.5 py-6;
+    }
+
+    .programs-filters__cols {
+        @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:divide-x lg:divide-border;
+    }
+
+    .programs-filters__cols > div {
+        @apply lg:px-4 first:lg:pl-0;
+    }
+
+    .programs-filters__label {
+        @apply mb-3 text-xs font-semibold uppercase tracking-wide text-muted;
+    }
+
+    .programs-filters__option {
+        @apply mb-2 flex items-center gap-2.5 text-base text-ink;
+    }
+
+    .programs-filters__muted {
+        @apply mb-2 text-base text-muted;
+    }
+
+    .programs-filters__footer {
+        @apply flex items-center;
+    }
+
+    .programs-filters__text {
+        @apply text-base font-medium text-ink;
+    }
+
+    .programs-filters__text.is-disabled {
+        @apply cursor-not-allowed text-muted;
+    }
+
+    .programs-filters__apply {
+        @apply inline-flex h-[35px] items-center rounded-full bg-pill px-4 text-sm font-medium text-white;
+    }
+
+    .programs-filters__apply.is-disabled {
+        @apply cursor-not-allowed bg-muted text-white;
+    }
+
+    .programs-h2 {
+        @apply font-display text-[22px] font-semibold leading-[1.35] text-ink-strong;
+    }
+
+    .programs-blurb {
+        @apply mt-1 max-w-3xl text-sm text-ink;
+    }
+
+    .programs-row-head {
+        @apply mb-5 flex items-start justify-between gap-4;
+    }
+
+    .programs-view-all {
+        @apply inline-flex h-9 shrink-0 items-center rounded-[52px] border border-ink px-[15px] py-1.5 text-sm font-medium text-ink transition duration-200 hover:bg-surface;
+    }
+
+    .programs-view-all-link {
+        @apply shrink-0 text-sm text-muted;
+    }
+
+    .programs-split {
+        @apply mb-10 grid gap-y-8 lg:grid-cols-[minmax(0,736px)_minmax(0,484px)] lg:gap-x-5 lg:gap-y-[30px];
+    }
+
+    .programs-collection {
+        @apply mt-10;
+    }
+
+    .programs-rail {
+        @apply grid grid-flow-col gap-5 overflow-x-auto pb-2;
+        grid-auto-columns: 232px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .programs-rail::-webkit-scrollbar,
+    .recipes-rail::-webkit-scrollbar,
+    .hidden-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .hidden-scrollbar {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    /* Full-width collection rows: fit N cards so the rightmost is never clipped. */
+    @media (min-width: 1024px) {
+        .programs-rail--fit {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            grid-auto-flow: row;
+            grid-auto-columns: unset;
+            overflow-x: visible;
+        }
+
+        .programs-rail--fit > .program-portrait,
+        .programs-rail--fit > .videos-card {
+            width: 100%;
+            max-width: none;
+            min-width: 0;
+        }
+
+        .programs-rail--fit .program-portrait__img {
+            max-width: none;
+        }
+    }
+
+    .program-new {
+        @apply absolute left-2 top-2 z-10 rounded-full bg-mint px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-ink;
+    }
+
+    .program-portrait {
+        @apply w-[232px] shrink-0 rounded-[20px] bg-white;
+    }
+
+    .program-portrait__media {
+        @apply relative overflow-hidden rounded-2xl;
+    }
+
+    .program-portrait__img {
+        @apply h-80 w-full max-w-[230px] rounded-2xl object-cover object-top transition duration-200 group-hover:scale-[1.03];
+    }
+
+    .program-portrait__cta {
+        @apply pointer-events-none absolute inset-x-0 bottom-4 mx-auto hidden w-fit rounded-full border border-ink bg-white px-4 py-2 text-sm text-ink group-hover:block;
+    }
+
+    .program-portrait__meta {
+        @apply mt-2 flex flex-wrap gap-2 text-xs text-muted;
+    }
+
+    .program-portrait .program-portrait__meta {
+        @apply px-2.5;
+    }
+
+    .program-meta-chip {
+        @apply inline-flex items-center gap-1 rounded-full bg-surface px-2.5 py-1;
+    }
+
+    .program-portrait__title {
+        @apply px-2.5 pb-3 pt-1 text-lg font-medium leading-[1.3] text-ink;
+    }
+
+    .program-featured-split {
+        @apply hidden gap-5 rounded-[20px] bg-white p-3 lg:flex;
+    }
+
+    .program-featured-split__media {
+        @apply relative h-[340px] w-[232px] shrink-0 overflow-hidden rounded-[15px];
+    }
+
+    .program-featured-split__img {
+        @apply h-full w-full object-cover object-top;
+    }
+
+    .program-featured-split__body {
+        @apply flex min-w-0 flex-1 flex-col py-2 pr-2;
+    }
+
+    .program-featured-split__date {
+        @apply text-xs font-medium uppercase tracking-wide text-muted;
+    }
+
+    .program-featured-split__title {
+        @apply mt-1 font-display text-xl font-semibold text-ink;
+    }
+
+    .program-featured-split__kv {
+        @apply mt-2 text-sm text-ink;
+    }
+
+    .program-featured-split__kv span {
+        @apply mr-2 text-xs font-semibold uppercase tracking-wide text-muted;
+    }
+
     .listing-search {
         @apply min-w-[12rem] flex-1;
     }
@@ -332,7 +762,118 @@
     }
 
     .video-duration {
-        @apply absolute bottom-2 right-2 rounded bg-ink-strong/80 px-1.5 py-0.5 text-[10px] font-semibold text-white;
+        @apply absolute bottom-2 right-2 flex h-[18px] min-w-10 items-center justify-center rounded bg-ink px-0 text-center text-[10px] font-bold leading-none text-white;
+    }
+
+    .videos-fav {
+        @apply inline-flex h-[34px] cursor-not-allowed items-center gap-1.5 rounded-[15px] px-3.5 text-sm font-medium;
+        color: color-mix(in srgb, var(--color-ink) 25%, var(--color-surface));
+    }
+
+    .videos-fav__label {
+        @apply hidden sm:inline;
+    }
+
+    .videos-listing .programs-filters__muted {
+        color: color-mix(in srgb, var(--color-ink) 25%, var(--color-surface));
+    }
+
+    .videos-filters__cols {
+        @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-6 lg:divide-x lg:divide-border;
+    }
+
+    .videos-filters__cols > div {
+        @apply lg:px-4 first:lg:pl-0;
+    }
+
+    .videos-latest {
+        @apply grid gap-5 overflow-x-auto lg:grid-cols-[737px_232px_232px];
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .videos-latest::-webkit-scrollbar {
+        display: none;
+    }
+
+    .videos-featured {
+        @apply grid gap-[30px] lg:grid-cols-[320px_minmax(0,1fr)];
+    }
+
+    .videos-featured__body {
+        @apply min-w-0;
+    }
+
+    .videos-featured__thumb {
+        @apply relative overflow-hidden rounded-2xl lg:h-[180px] lg:w-[320px];
+    }
+
+    .videos-featured__thumb img {
+        @apply aspect-video h-full w-full object-cover transition duration-200 ease-out group-hover:scale-[1.03];
+    }
+
+    .videos-featured__title {
+        @apply text-lg font-medium text-ink;
+    }
+
+    .videos-tags {
+        @apply mt-3 flex flex-wrap gap-2.5;
+    }
+
+    .videos-tag {
+        @apply rounded-full bg-surface px-3 py-1.5 text-[10px] font-semibold uppercase text-ink;
+    }
+
+    .videos-card {
+        @apply block w-[232px] shrink-0;
+    }
+
+    .videos-card__thumb {
+        @apply relative aspect-video w-full overflow-hidden rounded-2xl;
+    }
+
+    .videos-card__thumb img {
+        @apply h-full w-full object-cover transition duration-200 ease-out group-hover:scale-[1.03];
+    }
+
+    .videos-card__title {
+        @apply mt-2 text-base font-normal text-ink;
+    }
+
+    .videos-card__meta {
+        @apply mt-1 flex items-center justify-between gap-2 text-sm font-medium text-muted;
+    }
+
+    .videos-card__icons {
+        @apply flex shrink-0 gap-2 text-muted transition duration-200 group-hover:text-ink;
+    }
+
+    .videos-load-more {
+        @apply mt-6 flex h-[37px] items-center justify-center rounded-xl border border-border bg-white text-xs text-muted lg:h-[43px] lg:text-base;
+    }
+
+    .videos-filters-sheet {
+        @apply fixed inset-0 z-40 flex flex-col bg-white;
+    }
+
+    .videos-filters-sheet__head {
+        @apply flex items-center justify-between border-b border-border px-5 py-4;
+    }
+
+    .videos-filters-sheet__row {
+        @apply border-b border-border px-5;
+    }
+
+    .videos-filters-sheet__toggle {
+        @apply flex w-full items-center justify-between py-4 text-xs font-semibold uppercase tracking-wide text-muted;
+    }
+
+    .videos-filters-sheet__body {
+        @apply pb-4;
+    }
+
+    .videos-filters-sheet__foot {
+        @apply mt-auto flex items-center justify-between border-t border-border px-5 py-4;
     }
 
     .recipe-featured {
@@ -341,6 +882,136 @@
 
     .recipe-featured__hero {
         @apply block;
+    }
+
+    .recipes-latest {
+        @apply grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,293px)];
+    }
+
+    .recipes-featured {
+        @apply grid rounded-[15px] border border-border bg-white p-4 sm:p-6 lg:grid-cols-[minmax(0,656px)_minmax(0,217px)] lg:gap-5 lg:p-[15px_15px_24px];
+    }
+
+    .recipes-featured__thumb {
+        @apply relative overflow-hidden rounded-[10px];
+    }
+
+    .recipes-featured__thumb img {
+        @apply aspect-video h-full w-full object-cover transition duration-200 group-hover:scale-[1.03] lg:h-[369px] lg:aspect-auto;
+    }
+
+    .recipes-featured__body {
+        @apply flex min-w-0 flex-col pt-4 lg:pt-5;
+    }
+
+    .recipes-featured__title {
+        @apply text-lg font-medium text-ink;
+    }
+
+    .recipes-featured__cta {
+        @apply mt-auto flex items-center justify-between gap-3 pt-6;
+    }
+
+    .recipes-view-recipe {
+        @apply inline-flex h-[35px] items-center rounded-full border border-ink bg-white px-4 text-sm text-ink;
+    }
+
+    .recipes-card {
+        @apply block w-[293px] shrink-0;
+    }
+
+    .recipes-card__thumb {
+        @apply relative overflow-hidden rounded-[20px];
+    }
+
+    .recipes-card__thumb img {
+        @apply aspect-[293/391] h-auto w-full object-cover transition duration-200 group-hover:scale-[1.03];
+    }
+
+    .recipes-card__title {
+        @apply mt-2 text-base font-medium text-ink;
+    }
+
+    .recipes-card__time {
+        @apply mt-1 text-sm text-muted;
+    }
+
+    .recipes-card__icons {
+        @apply flex shrink-0 items-center gap-2;
+    }
+
+    .recipes-overlay {
+        @apply absolute inset-x-3 top-3 z-10 flex items-center justify-between gap-2 rounded-full bg-white/85 px-3 py-1.5;
+    }
+
+    .recipes-stars {
+        @apply flex items-center gap-0.5 text-muted;
+    }
+
+    .recipes-rating-chip {
+        @apply mt-3 inline-flex w-fit items-center gap-1 rounded-full bg-surface px-2.5 py-1 text-muted;
+    }
+
+    .recipes-icon-btn {
+        @apply inline-flex h-7 w-7 items-center justify-center rounded-full border border-ink/40 text-ink;
+    }
+
+    .recipes-heart {
+        @apply h-4 w-4 shrink-0 text-ink;
+    }
+
+    .recipes-icon-btn--muted {
+        @apply cursor-not-allowed text-muted;
+    }
+
+    .recipes-tags {
+        @apply absolute bottom-3 left-3 z-10 flex flex-col gap-1;
+    }
+
+    .recipes-tag {
+        @apply inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/90 text-[10px] font-semibold text-ink;
+    }
+
+    .recipes-popular {
+        @apply mt-5 grid gap-x-5 gap-y-2 sm:grid-cols-2 lg:grid-cols-4;
+    }
+
+    .recipes-popular__tile {
+        @apply flex items-center gap-3 rounded-[14px] border border-border bg-white p-1.5 pr-3;
+    }
+
+    .recipes-popular__img {
+        @apply h-[88px] w-[88px] rounded-[14px] object-cover;
+    }
+
+    .recipes-popular__title {
+        @apply block text-lg font-medium text-ink-strong;
+    }
+
+    .recipes-popular__count {
+        @apply mt-0.5 block text-sm text-muted;
+    }
+
+    .recipes-rail {
+        @apply grid grid-flow-col gap-5 overflow-x-auto pb-2;
+        grid-auto-columns: 293px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    @media (min-width: 1024px) {
+        .recipes-rail {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-auto-flow: row;
+            grid-auto-columns: unset;
+            overflow-x: visible;
+        }
+
+        .recipes-rail > .recipes-card {
+            width: 100%;
+            max-width: none;
+            min-width: 0;
+        }
     }
 
     .auth-shell {
@@ -383,56 +1054,357 @@
         @apply h-20 w-24 shrink-0 rounded-xl object-cover;
     }
 
+    .forum-listing {
+        @apply relative;
+    }
+
     .forum-shell {
-        @apply grid gap-8 rounded-3xl border border-border bg-white p-4 sm:p-6 lg:grid-cols-[14rem_1fr];
+        @apply mx-auto grid w-full max-w-[1240px] lg:grid-cols-[13.75rem_minmax(0,1fr)];
+    }
+
+    .forum-shell__nav {
+        @apply hidden min-h-[calc(100vh-3.5rem)] flex-col border-r border-border px-3 py-6 lg:flex;
+    }
+
+    .forum-shell__heading {
+        @apply px-2 font-display text-lg font-semibold text-ink;
+    }
+
+    .forum-channels {
+        @apply mt-4 flex-1 space-y-0.5;
     }
 
     .forum-channel {
-        @apply block rounded-xl px-3 py-2 text-sm text-ink/80;
+        @apply relative flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-muted transition duration-300 hover:bg-surface hover:text-ink;
     }
 
     .forum-channel--active {
-        @apply bg-lavender/70 font-semibold text-ink;
+        @apply bg-lavender font-semibold text-ink;
     }
 
-    .forum-search__input {
-        @apply w-40 rounded-full border border-border bg-surface px-4 py-2 text-sm text-muted;
+    .forum-channel--active::before {
+        content: '';
+        @apply absolute inset-y-1 left-0 w-1 rounded-full bg-brand;
+    }
+
+    .forum-tools {
+        @apply sticky bottom-0 mt-4 flex items-center justify-between gap-2 border-t border-border bg-white px-2 py-4 text-muted;
+    }
+
+    .forum-tool {
+        @apply inline-flex h-8 w-8 items-center justify-center rounded-full transition duration-300;
+    }
+
+    .forum-shell__main {
+        @apply min-w-0 px-4 pb-24 pt-5 sm:px-6 lg:px-10 lg:pb-10;
+    }
+
+    .forum-main__top {
+        @apply flex items-center justify-between gap-3;
+    }
+
+    .forum-channel-title {
+        @apply font-display text-xl font-semibold text-ink;
+    }
+
+    .forum-channel-select {
+        @apply inline-flex items-center gap-2 rounded-xl border border-border bg-white px-3 py-2 text-sm font-semibold text-ink;
+    }
+
+    .forum-main__actions {
+        @apply flex items-center gap-3;
+    }
+
+    .forum-search-btn {
+        @apply inline-flex items-center gap-1.5 text-sm text-ink transition duration-300 hover:text-muted;
+    }
+
+    .forum-search-field {
+        @apply inline-flex items-center gap-2 rounded-full bg-surface px-3 py-1.5;
+        animation: forumSearchIn 0.3s ease-out;
+    }
+
+    .forum-search-field__input {
+        @apply w-36 border-0 bg-transparent text-sm text-ink outline-none placeholder:text-muted sm:w-44;
+    }
+
+    .forum-create-post {
+        @apply inline-flex h-[29px] items-center rounded-[35px] bg-pill px-4 text-sm font-bold text-white transition duration-300 hover:bg-black;
+    }
+
+    .forum-sort {
+        @apply mt-4 flex items-center gap-2;
+    }
+
+    .forum-sort-toggle {
+        @apply inline-flex rounded-full bg-surface p-0.5;
+    }
+
+    .forum-sort-toggle button {
+        @apply rounded-full px-3.5 py-1.5 text-sm text-ink transition duration-300;
+    }
+
+    .forum-sort-toggle button.is-active {
+        @apply bg-pill text-white;
+    }
+
+    .forum-all-btn {
+        @apply inline-flex items-center gap-1.5 text-sm text-ink transition duration-300;
+    }
+
+    .forum-all-btn--icon {
+        @apply h-8 w-8 items-center justify-center rounded-full bg-surface;
+    }
+
+    .forum-all-menu {
+        @apply right-0 origin-top-right;
+        animation: forumMenuIn 0.3s ease-out;
+    }
+
+    .forum-empty {
+        @apply mt-10 text-sm text-muted;
+    }
+
+    .forum-feed {
+        @apply mt-4 divide-y divide-border;
+        animation: forumSearchIn 0.3s ease-out;
     }
 
     .forum-thread {
-        @apply flex gap-3 py-5;
+        @apply -mx-2 rounded-xl px-2 py-6 transition duration-300;
+    }
+
+    .forum-thread:hover {
+        @apply bg-surface/70;
+    }
+
+    .forum-thread__meta {
+        @apply flex items-start justify-between gap-3;
+    }
+
+    .forum-thread__who {
+        @apply flex min-w-0 flex-wrap items-center gap-2;
     }
 
     .forum-thread__avatar {
-        @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand/10 text-sm font-semibold text-brand;
+        @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/10 text-xs font-semibold text-brand;
+    }
+
+    .forum-thread__author {
+        @apply inline-flex items-center gap-1 text-sm font-semibold;
+    }
+
+    .forum-thread__author--brand {
+        @apply text-brand;
+    }
+
+    .forum-thread__author--ink {
+        @apply text-ink;
+    }
+
+    .forum-thread__author--muted {
+        @apply text-muted;
+    }
+
+    .forum-thread__badge {
+        @apply h-3.5 w-3.5 text-sky;
+    }
+
+    .forum-thread__when {
+        @apply text-xs text-muted;
+    }
+
+    .forum-thread__tags {
+        @apply flex flex-wrap items-center justify-end gap-1.5;
     }
 
     .forum-tag {
-        @apply rounded-full bg-lavender/80 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-ink/80;
+        @apply inline-flex items-center gap-1 rounded-full bg-surface px-2 py-0.5 text-[11px] font-medium text-ink;
+    }
+
+    .forum-tag--pinned {
+        @apply bg-lavender text-ink;
+    }
+
+    .forum-tag--new {
+        @apply bg-sky text-ink;
+    }
+
+    .forum-thread__heading {
+        @apply mt-3 flex flex-wrap items-center gap-2;
+    }
+
+    .forum-thread__title {
+        @apply text-lg font-semibold text-ink;
+    }
+
+    .forum-thread__snippet {
+        @apply mt-2 max-w-[46rem] text-sm leading-6 text-muted;
+    }
+
+    .forum-thread__actions {
+        @apply mt-4 flex flex-wrap items-center gap-2;
+    }
+
+    .forum-action {
+        @apply inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-3 py-1 text-xs text-muted transition duration-300;
+    }
+
+    button.forum-action:disabled {
+        @apply cursor-not-allowed;
+    }
+
+    .forum-pager {
+        @apply mt-6 flex items-center justify-between;
+    }
+
+    .forum-pager__btn {
+        @apply text-sm text-ink transition duration-300 disabled:cursor-not-allowed disabled:text-muted;
+    }
+
+    .forum-fab {
+        @apply fixed bottom-5 right-4 z-30 inline-flex h-11 items-center rounded-full bg-pill px-5 text-sm font-bold text-white shadow-md transition duration-300 hover:bg-black;
+    }
+
+    .about-page {
+        @apply bg-white pb-16 pt-0;
+    }
+
+    .about-page > .site-container {
+        @apply lg:px-5 xl:px-0;
     }
 
     .about-hero {
-        @apply bg-surface;
+        @apply grid rounded-lg px-5 pt-10;
+        background: color-mix(in srgb, var(--color-lavender) 10%, white);
     }
 
-    .about-hero__grid {
-        @apply grid items-center gap-10 py-12 lg:grid-cols-2 lg:py-16;
+    .about-hero__name {
+        @apply mb-3 font-display text-[40px] font-bold leading-[1.57] text-ink;
+    }
+
+    .about-hero__role {
+        @apply text-[22px] font-bold leading-[1.57] text-ink;
     }
 
     .about-hero__img {
-        @apply mx-auto max-h-[28rem] w-full max-w-md object-contain;
+        @apply mx-auto max-h-[604px] w-full object-contain object-bottom;
     }
 
-    .about-panel {
-        @apply rounded-3xl bg-white p-6 shadow-sm ring-1 ring-border sm:p-8;
+    .about-hero__bio {
+        @apply mt-8 text-[22px] font-normal leading-[1.57] text-ink lg:mt-20;
+    }
+
+    .about-story {
+        @apply mt-[75px] grid items-center gap-8 lg:grid-cols-[minmax(0,600px)_minmax(0,596px)] lg:gap-x-11;
+    }
+
+    .about-story__img {
+        @apply w-full object-cover;
+    }
+
+    .about-story__body {
+        @apply text-[22px] font-normal leading-[1.57] text-ink;
+    }
+
+    .about-awards {
+        @apply mt-[75px] rounded-2xl bg-white py-[50px] pb-[75px];
+    }
+
+    .about-awards__title {
+        @apply font-display text-[40px] font-medium leading-[1.57] text-ink-strong;
+    }
+
+    .about-awards__grid {
+        @apply mx-auto mt-8 grid max-w-[1110px] items-center gap-y-[68px] gap-x-5 lg:grid-cols-[424px_minmax(0,666px)];
+    }
+
+    .about-awards__art-img {
+        @apply mx-auto max-h-[365px] w-auto;
+    }
+
+    .about-awards__cards {
+        @apply grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3;
+    }
+
+    .about-award {
+        @apply flex min-h-[266px] flex-col items-center rounded-lg bg-sky px-4 pb-5 pt-[30px] text-center text-brand;
+    }
+
+    .about-award__label {
+        @apply text-[22px] font-bold leading-[1.57];
+    }
+
+    .about-award__text {
+        @apply mt-4 text-base font-normal leading-[1.57];
+    }
+
+    .about-list {
+        @apply mx-auto mt-10 max-w-[1110px];
+    }
+
+    .about-list__title {
+        @apply text-[36px] font-medium leading-[1.57] text-ink;
+    }
+
+    .about-list__items {
+        @apply mt-4 grid gap-x-[50px] gap-y-2.5 lg:grid-cols-2;
+    }
+
+    .about-list__item {
+        @apply py-3 text-lg font-bold leading-[1.57] text-ink;
+    }
+
+    .about-list__body {
+        @apply mt-1 text-base font-normal text-ink;
     }
 
     .about-closing {
-        @apply grid items-center gap-8 rounded-3xl bg-surface p-6 sm:p-10 lg:grid-cols-2;
+        @apply mt-[75px] grid items-start gap-5 lg:grid-cols-[496px_minmax(0,1fr)];
     }
 
     .about-closing__img {
-        @apply mx-auto max-h-64 w-full object-contain;
+        @apply w-full rounded-lg object-cover;
+    }
+
+    .about-closing__copy {
+        @apply lg:py-[120px];
+    }
+
+    .about-closing__quote {
+        @apply text-[25px] font-bold leading-[1.57] text-ink;
+    }
+
+    .about-closing__sign {
+        @apply mt-8 font-display text-lg text-ink;
+    }
+
+    .about-note {
+        @apply mt-10 max-w-3xl text-sm text-muted;
+    }
+
+    @media (min-width: 1024px) {
+        .about-hero {
+            grid-template-columns: minmax(0, 705px) 411px;
+            grid-template-rows: auto 1fr;
+            column-gap: 5%;
+            padding: 40px 0 0 65px;
+        }
+
+        .about-hero__copy {
+            align-self: center;
+        }
+
+        .about-hero__media {
+            grid-column: 2;
+            grid-row: 1 / 3;
+            align-self: end;
+        }
+
+        .about-hero__bio {
+            grid-column: 1;
+            grid-row: 2;
+        }
     }
 
     @media (hover: hover) and (pointer: fine) {
@@ -441,15 +1413,39 @@
         .auth-oauth:active {
             transform: scale(0.97);
         }
+
+        span.forum-action:hover {
+            @apply border-ink text-ink;
+        }
     }
 
     @media (prefers-reduced-motion: reduce) {
         .filter-chip,
         .btn-pill,
         .program-list-card__img,
+        .program-portrait__img,
         .video-list-card__thumb img,
-        .recipe-list-card__img {
+        .videos-featured__thumb img,
+        .videos-card__thumb img,
+        .recipes-featured__thumb img,
+        .recipes-card__thumb img,
+        .recipe-list-card__img,
+        .forum-channel,
+        .forum-action,
+        .forum-search-btn,
+        .forum-pager__btn,
+        .forum-sort-toggle button,
+        .forum-thread,
+        .forum-create-post,
+        .forum-fab {
             transition: none;
+        }
+
+        .forum-all-menu,
+        .forum-search-field,
+        .forum-feed,
+        .programs-browse-menu {
+            animation: none;
         }
     }
 

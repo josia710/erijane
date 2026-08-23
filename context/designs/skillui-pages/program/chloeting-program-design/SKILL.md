@@ -5,13 +5,29 @@ description: Design system skill for chloeting-program. Activate when building U
 
 # chloeting-program Design System
 
-You are building UI for **chloeting-program**. Light-themed, cool palette, sans-serif typography (Poppins), standard density on a 5px grid.
+You are matching **https://chloeting.com/program** (Workout Programs listing), not the homepage.
+
+**Start here (2026-08-22):** `references/LIVE_CAPTURE_2026-08-22.md` + `screens/live-2026-08-22/`. Older embeds below (homepage.png, mixed home/login pages) are stale SkillUI crawl leftovers — do not implement from them.
+
+UI type is **Manrope**. Poppins appears on the desktop hero H1 “Available Now” only. Hero uses a **background image**, not flat-only surfaces.
 
 ## Visual Reference
 
 **IMPORTANT**: Study ALL screenshots below before writing any UI. Match colors, typography, spacing, layout, and motion exactly as shown.
 
-### Homepage
+### Live /program (2026-08-22)
+
+![Hero 1440](screens/live-2026-08-22/01-hero-1440.png)
+
+![Featured + popular](screens/live-2026-08-22/02-latest-featured-1440.png)
+
+![Filters](screens/live-2026-08-22/05-filters-open-1440.png)
+
+![Browse](screens/live-2026-08-22/06-browse-dropdown-1440.png)
+
+![Mobile 390](screens/live-2026-08-22/08-mobile-390.png)
+
+### Stale SkillUI homepage embed (ignore)
 
 ![chloeting-program Homepage](screenshots/homepage.png)
 
@@ -55,8 +71,9 @@ This package includes extended documentation. **Read these files before implemen
 
 | File | Contents |
 |------|----------|
+| `references/LIVE_CAPTURE_2026-08-22.md` | **START HERE** — measured live /program layout, type, colors |
 | `references/DESIGN.md` | Full design system tokens, colors, typography, spacing |
-| `references/VISUAL_GUIDE.md` | **START HERE** — Master visual guide with all screenshots embedded |
+| `references/VISUAL_GUIDE.md` | Older SkillUI visual guide (mixed URLs — verify against live capture) |
 | `references/ANIMATIONS.md` | CSS keyframes, scroll triggers, motion library stack, video specs |
 | `references/LAYOUT.md` | Flex/grid containers, page structure, spacing relationships |
 | `references/COMPONENTS.md` | DOM component patterns, HTML structure, class fingerprints |
@@ -65,13 +82,12 @@ This package includes extended documentation. **Read these files before implemen
 
 ## Design Philosophy
 
-- **Layered depth** — use shadow tokens to create a sense of physical layering. Each elevation level has a specific shadow.
-- **Solid colors only** — no gradients anywhere. Every surface is a single flat color.
-- **Type pairing** — Poppins for body/UI text, Manrope for headings/display. Never introduce a third typeface.
-- **standard density** — 5px base grid. Every dimension is a multiple of 5.
-- **cool palette** — the color temperature runs cool, matching the sans-serif typography.
-- **Restrained accent** — `#c1ebe6` is the only pop of color. Used exclusively for CTAs, links, focus rings, and active states.
-- **Minimal motion** — prefer instant state changes. Only use transitions for loading and page transitions.
+- **Manrope UI** — nav, cards, filters, H2/H3. Poppins only on desktop hero H1.
+- **Hero is a photo wash** — `homepage-background-2025` PNG behind the app promo; not a flat white band.
+- **Mint NEW** — `#c1ebe6` pill on new programs. Dark `#303033` pills for Log In / open Filters.
+- **Two-column desktop listing** — Latest Challenges 736px + Most Popular 484px, then full-width collection rows.
+- **5px density** — measured radii 15–20px cards, 35–52px pills.
+- **Filter Ant blues** (`#1890ff`) — never as Erijane brand; curated tokens win for chrome.
 
 ## Color System
 

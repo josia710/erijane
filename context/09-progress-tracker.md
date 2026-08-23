@@ -13,6 +13,7 @@ Living checklist. Update after every feature. Agents read this early each sessio
 - [x] 16 — Programs / Videos / Recipes listing chrome
 - [x] 17 — About + Login + Signup shells
 - [x] 18 — Community per locked option
+- [x] 18b — `/community` live forums chrome (2026-08-22)
 - [x] 19 — Parity tests beyond home
 
 ## Phase 1
@@ -44,3 +45,17 @@ Living checklist. Update after every feature. Agents read this early each sessio
 | 2026-08-11 | Phase 4: auth 2-col, community C hybrid, listing chrome | Optional: re-SkillUI recipes; imprint |
 | 2026-08-11 | Imprint + remember; recipes featured/rows from live IA | Commit/PR when asked |
 | 2026-08-11 | git init + initial commit (screens gitignored) | Optional: remote + PR |
+| 2026-08-22 | Live `/program` capture: screens + measured spec | Implement listing parity when approved |
+| 2026-08-22 | Programs listing matches live chrome (hero, browse, filters, collections) | Optional: SkillUI ultra after Playwright; collection CMS fields |
+| 2026-08-22 | Live `/workout-video-library` capture: screens + measured spec | Implement `/videos` listing parity when approved |
+| 2026-08-22 | Videos listing matches live chrome (browse, favorites, 6-col filters, landscape rows) | Optional: collection CMS fields; recipes next |
+| 2026-08-22 | Live `/recipes` capture: screens + measured spec | Implement `/recipes` listing parity when approved |
+| 2026-08-22 | Recipes listing matches live chrome (browse, saved, 5-col filters, popular tiles) | Optional: collection CMS fields |
+| 2026-08-22 | Program days/min meta chips: pill radius + surface fill | Commit/PR when asked |
+| 2026-08-22 | Recipe card overlay pill + circular actions + star chip chrome | Commit/PR when asked |
+| 2026-08-22 | Community `/c/fitness-discussions` live chrome on `/community` | Commit/PR when asked |
+| 2026-08-22 | `/videos` live chrome check: 1240 Latest row, browse 0.3s, Load More 43px, duration 18px | Commit/PR when asked |
+| 2026-08-22 | `/about` live chrome: hero band, story split, value cards, closing | Commit/PR when asked |
+| 2026-08-22 | Listing rails: fluid fit at lg+ so rightmost cards never clip (recipes 4 / programs+videos 5) | Commit/PR when asked |
+| 2026-08-22 | App-promo hero: stacked live collage (8 PNGs, 719×572) on home + `/programs` | Commit/PR when asked |
+| 2026-08-22 | Shared listing icons match live `/program` sizes (`.ui-icon--*`) across programs/videos/recipes/community + footer socials | Commit/PR when asked |

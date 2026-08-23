@@ -3,7 +3,8 @@
 @section('title', 'Workout Programs - Erijane')
 
 @section('content')
-<div class="site-container py-12">
+<x-app-promo-hero />
+<div class="bg-surface">
     <livewire:programs.index />
 </div>
 @endsection

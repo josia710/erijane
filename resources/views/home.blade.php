@@ -4,8 +4,6 @@
 
 @section('content')
 @php
-    $a = \App\Support\SiteContent::assets();
-    $hero = \App\Support\SiteContent::section('home', 'hero');
     $programs = \App\Models\Program::query()->published()->orderBy('sort')->take(3)->get();
     $videos = \App\Models\Video::query()->published()->orderBy('sort')->get();
     $recipes = \App\Models\Recipe::query()->published()->orderBy('sort')->take(4)->get();
@@ -13,38 +11,7 @@
     $features = \App\Support\SiteContent::communityFeatures();
 @endphp
 
-{{-- Hero --}}
-<section
-    class="home-hero overflow-hidden bg-white md:bg-cover md:bg-center md:bg-no-repeat"
-    style="--hero-bg: url('{{ asset($a['hero_bg']) }}')"
->
-    <div class="site-container grid items-center gap-10 py-12 lg:grid-cols-2 lg:py-16">
-        <div class="home-reveal">
-            <img src="{{ asset($a['app_icon']) }}" alt="App icon" class="mb-5 h-14 w-14 rounded-[1.25rem] shadow-md">
-            <h1 class="font-display text-[2.25rem] font-semibold leading-tight tracking-tight text-ink-strong sm:text-[2.6rem]">{{ $hero?->title ?? 'Available Now' }}</h1>
-            <p class="mt-3 text-base text-muted sm:text-lg">{{ $hero?->body ?? 'Download for free on the app stores' }}</p>
-            <div class="mt-6 flex flex-wrap items-center gap-3">
-                <a href="https://play.google.com" target="_blank" rel="noopener" class="cursor-pointer">
-                    <img src="{{ asset($a['google']) }}" alt="Google Play" class="h-12 w-auto">
-                </a>
-                <a href="https://www.apple.com/app-store/" target="_blank" rel="noopener" class="cursor-pointer">
-                    <img src="{{ asset($a['apple']) }}" alt="App Store" class="h-12 w-auto">
-                </a>
-            </div>
-        </div>
-
-        <div class="home-reveal relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-rose-100/90 via-rose-50/80 to-sky-100/90 px-6 py-8 md:bg-white/70 md:backdrop-blur-[2px]">
-            <div class="relative mx-auto min-h-[380px] w-full max-w-md">
-                <img src="{{ asset($a['banner']) }}" alt="Erijane app" class="relative z-10 mx-auto w-52 drop-shadow-2xl sm:w-60">
-                <img src="{{ asset($a['track_kcal_out']) }}" alt="Track kcal out" class="absolute left-0 top-6 z-20 hidden w-24 sm:block">
-                <img src="{{ asset($a['monitor']) }}" alt="Monitor" class="absolute -left-2 top-32 z-20 hidden w-28 sm:block">
-                <img src="{{ asset($a['organize']) }}" alt="Organize" class="absolute right-0 top-10 z-20 hidden w-28 sm:block">
-                <img src="{{ asset($a['train']) }}" alt="Train" class="absolute bottom-4 right-0 z-20 hidden w-28 sm:block">
-                <img src="{{ asset($a['connect']) }}" alt="Connect" class="absolute bottom-8 left-0 z-20 hidden w-28 sm:block">
-            </div>
-        </div>
-    </div>
-</section>
+<x-app-promo-hero />
 
 {{-- Programs --}}
 <section class="site-container py-14">
