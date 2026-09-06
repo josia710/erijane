@@ -417,6 +417,7 @@
         aspect-ratio: 16 / 10;
         overflow: hidden;
         border-radius: var(--carousel-radius);
+        position: relative;
     }
 
     /* Image keeps its own radius so the hover scale stays clipped in Safari */
@@ -474,7 +475,16 @@
         @apply flex flex-wrap items-center gap-3 py-4;
     }
 
-    /* Live /program icon sizes (measured 2026-08-22 icon-font glyphs). */
+    /* Live /workout-video-library icon sizes (measured icon-font glyphs). */
+    .ui-icon--meta-info {
+        width: 19px;
+        height: 19px;
+    }
+
+    .ui-icon--meta-heart {
+        width: 20px;
+        height: 20px;
+    }
     .ui-icon {
         @apply shrink-0;
     }
@@ -627,6 +637,12 @@
         grid-auto-columns: 232px;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        scroll-snap-type: x proximity;
+    }
+
+    .programs-rail > .program-portrait,
+    .programs-rail > .videos-card {
+        scroll-snap-align: start;
     }
 
     .programs-rail::-webkit-scrollbar,
@@ -766,7 +782,7 @@
     }
 
     .videos-fav {
-        @apply inline-flex h-[34px] cursor-not-allowed items-center gap-1.5 rounded-[15px] px-3.5 text-sm font-medium;
+        @apply inline-flex h-[34px] items-center gap-1.5 rounded-[15px] px-3.5 text-sm font-medium;
         color: color-mix(in srgb, var(--color-ink) 25%, var(--color-surface));
     }
 
@@ -809,7 +825,7 @@
     }
 
     .videos-featured__thumb img {
-        @apply aspect-video h-full w-full object-cover transition duration-200 ease-out group-hover:scale-[1.03];
+        @apply aspect-video h-full w-full object-cover lg:h-[180px] lg:w-[320px];
     }
 
     .videos-featured__title {
@@ -821,7 +837,7 @@
     }
 
     .videos-tag {
-        @apply rounded-full bg-surface px-3 py-1.5 text-[10px] font-semibold uppercase text-ink;
+        @apply rounded-full bg-surface px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-ink;
     }
 
     .videos-card {
@@ -833,7 +849,30 @@
     }
 
     .videos-card__thumb img {
-        @apply h-full w-full object-cover transition duration-200 ease-out group-hover:scale-[1.03];
+        @apply h-full w-full object-cover;
+    }
+
+    /* Live hover: overlay darkens (bg-color transition), no image scale. */
+    .videos-card__thumb::after,
+    .videos-featured__thumb::after,
+    .videos-carousel__thumb::after {
+        content: '';
+        @apply pointer-events-none absolute inset-0 z-[2] rounded-[inherit];
+        transition: background-color 0.3s ease;
+    }
+
+    .group:hover .videos-card__thumb::after,
+    .group:hover .videos-featured__thumb::after,
+    .group:hover .videos-carousel__thumb::after {
+        background-color: rgb(0 0 0 / 0.3);
+    }
+
+    @media (hover: none) {
+        .group:hover .videos-card__thumb::after,
+        .group:hover .videos-featured__thumb::after,
+        .group:hover .videos-carousel__thumb::after {
+            background-color: transparent;
+        }
     }
 
     .videos-card__title {
@@ -1410,6 +1449,12 @@
     @media (hover: hover) and (pointer: fine) {
         .filter-chip:active,
         .btn-pill:active,
+        .btn-outline-pill:active,
+        .btn-ghost:active,
+        .programs-view-all:active,
+        .programs-filters__apply:active,
+        .forum-create-post:active,
+        .forum-fab:active,
         .auth-oauth:active {
             transform: scale(0.97);
         }
@@ -1419,9 +1464,38 @@
         }
     }
 
+    /*
+     * Carousel controls (W0 preset): Embla arrows + dots consumed by
+     * listing rails in W1/W2. Critically damped feel: 200ms ease-out,
+     * press scale on buttons, no bounce (no momentum gesture here).
+     */
+    .carousel-btn {
+        @apply inline-flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-border bg-white text-ink shadow-sm transition duration-200 hover:border-ink hover:text-ink-strong disabled:cursor-not-allowed disabled:opacity-40;
+    }
+
+    .carousel-btn:active {
+        transform: scale(0.93);
+    }
+
+    .carousel-dots {
+        @apply flex items-center justify-center gap-1.5;
+    }
+
+    .carousel-dots button {
+        @apply h-1.5 w-1.5 cursor-pointer rounded-full bg-ink/20 transition duration-200 hover:bg-ink/40;
+    }
+
+    .carousel-dots button.is-active {
+        @apply w-5 bg-ink;
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .filter-chip,
         .btn-pill,
+        .btn-outline-pill,
+        .btn-ghost,
+        .carousel-btn,
+        .carousel-dots button,
         .program-list-card__img,
         .program-portrait__img,
         .video-list-card__thumb img,

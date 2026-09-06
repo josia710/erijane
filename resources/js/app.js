@@ -58,9 +58,38 @@ function initHomeCarousels() {
             requestAnimationFrame(() => requestAnimationFrame(kick));
         }
 
-        const toggle = root
-            .closest('[data-home-carousel-section]')
-            ?.querySelector('[data-home-autoplay-toggle]');
+        const section = root.closest('[data-home-carousel-section]');
+        const toggle = section?.querySelector('[data-home-autoplay-toggle]');
+        const prevBtn = section?.querySelector('[data-home-prev]');
+        const nextBtn = section?.querySelector('[data-home-next]');
+        const dotsWrap = section?.querySelector('[data-home-dots]');
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => embla.scrollPrev());
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => embla.scrollNext());
+        }
+
+        if (dotsWrap) {
+            const snaps = embla.scrollSnapList();
+            const dots = snaps.map((_, i) => {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                dot.addEventListener('click', () => embla.scrollTo(i));
+                dotsWrap.appendChild(dot);
+                return dot;
+            });
+            const syncDots = () => {
+                const selected = embla.selectedScrollSnap();
+                dots.forEach((dot, i) => dot.classList.toggle('is-active', i === selected));
+            };
+            embla.on('select', syncDots);
+            embla.on('reInit', syncDots);
+            syncDots();
+        }
 
         if (toggle && autoplay) {
             const syncToggle = (playing) => {

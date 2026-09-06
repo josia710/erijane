@@ -52,6 +52,9 @@ class CatalogCmsTest extends TestCase
 
         foreach (['programs', 'videos', 'recipes', 'store'] as $group) {
             foreach ($catalog[$group] as $row) {
+                if (empty($row['image'])) {
+                    continue;
+                }
                 $this->assertFileExists(public_path($row['image']), $row['image']);
             }
         }

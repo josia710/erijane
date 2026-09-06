@@ -23,6 +23,8 @@ new class extends Component
 
     public array $draftYear = [];
 
+    public array $draftHistory = [];
+
     #[Url]
     public array $focus = [];
 
@@ -35,6 +37,9 @@ new class extends Component
     #[Url]
     public array $year = [];
 
+    #[Url]
+    public array $history = [];
+
     public function toggleFilters(): void
     {
         $this->filtersOpen = ! $this->filtersOpen;
@@ -43,6 +48,7 @@ new class extends Component
             $this->draftDuration = $this->duration;
             $this->draftEquipment = $this->equipment;
             $this->draftYear = $this->year;
+            $this->draftHistory = $this->history;
         }
     }
 
@@ -52,6 +58,7 @@ new class extends Component
         $this->duration = $this->draftDuration;
         $this->equipment = $this->draftEquipment;
         $this->year = $this->draftYear;
+        $this->history = $this->draftHistory;
         $this->filtersOpen = false;
     }
 
@@ -61,6 +68,7 @@ new class extends Component
         $this->draftDuration = $this->duration;
         $this->draftEquipment = $this->equipment;
         $this->draftYear = $this->year;
+        $this->draftHistory = $this->history;
         $this->filtersOpen = false;
     }
 
@@ -70,10 +78,12 @@ new class extends Component
         $this->draftDuration = [];
         $this->draftEquipment = [];
         $this->draftYear = [];
+        $this->draftHistory = [];
         $this->focus = [];
         $this->duration = [];
         $this->equipment = [];
         $this->year = [];
+        $this->history = [];
     }
 
     public function selectCollection(string $key): void
@@ -83,7 +93,7 @@ new class extends Component
 
     public function hasActiveFilters(): bool
     {
-        return $this->focus !== [] || $this->duration !== [] || $this->equipment !== [] || $this->year !== [];
+        return $this->focus !== [] || $this->duration !== [] || $this->equipment !== [] || $this->year !== [] || $this->history !== [];
     }
 
     public function with(): array
@@ -102,6 +112,14 @@ new class extends Component
             $this->equipment,
             $this->year,
         ))->values();
+
+        if ($this->history !== []) {
+            $done = session()->get('completed_programs', []);
+            $wantDone = in_array('completed', $this->history, true);
+            $wantOpen = in_array('not-completed', $this->history, true);
+            $items = $items->filter(fn (Program $p) => ($wantDone && in_array($p->slug, $done, true))
+                || ($wantOpen && ! in_array($p->slug, $done, true)))->values();
+        }
 
         $keys = $this->collection === 'all' || $this->collection === ''
             ? array_keys(ProgramListing::collections())
@@ -248,15 +266,19 @@ new class extends Component
                     </div>
                     <div>
                         <h3 class="programs-filters__label">History</h3>
-                        <p class="programs-filters__muted">I've Completed</p>
-                        <p class="programs-filters__muted">I Have Not Completed</p>
+                        @foreach (['completed' => "I've Completed", 'not-completed' => 'I Have Not Completed'] as $value => $label)
+                            <label class="programs-filters__option">
+                                <input type="checkbox" wire:model="draftHistory" value="{{ $value }}">
+                                {{ $label }}
+                            </label>
+                        @endforeach
                     </div>
                 </div>
                 <div class="programs-filters__footer">
-                    <button type="button" class="programs-filters__text {{ $this->hasActiveFilters() ? '' : 'is-disabled' }}" wire:click="clearFilters" @disabled(! $this->hasActiveFilters() && $draftFocus === [] && $draftDuration === [] && $draftEquipment === [] && $draftYear === [])>Clear Filters</button>
+                    <button type="button" class="programs-filters__text {{ $this->hasActiveFilters() ? '' : 'is-disabled' }}" wire:click="clearFilters" @disabled(! $this->hasActiveFilters() && $draftFocus === [] && $draftDuration === [] && $draftEquipment === [] && $draftYear === [] && $draftHistory === [])>Clear Filters</button>
                     <div class="ml-auto flex items-center gap-4">
                         <button type="button" class="programs-filters__text" wire:click="cancelFilters">Cancel</button>
-                        <button type="button" class="programs-filters__apply {{ ($draftFocus !== [] || $draftDuration !== [] || $draftEquipment !== [] || $draftYear !== []) ? '' : 'is-disabled' }}" wire:click="applyFilters">Apply</button>
+                        <button type="button" class="programs-filters__apply {{ ($draftFocus !== [] || $draftDuration !== [] || $draftEquipment !== [] || $draftYear !== [] || $draftHistory !== []) ? '' : 'is-disabled' }}" wire:click="applyFilters">Apply</button>
                     </div>
                 </div>
             </div>

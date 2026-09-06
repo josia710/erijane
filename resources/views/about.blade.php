@@ -18,7 +18,7 @@
 @endphp
 <div class="about-page">
     <div class="site-container">
-        <section class="about-hero">
+        <section class="about-hero home-reveal">
             <div class="about-hero__copy">
                 <p class="about-hero__name">{{ $intro?->title ?: 'Erijane' }}</p>
                 <p class="about-hero__role">Affordable fitness apparel · community motivation</p>
@@ -37,7 +37,7 @@
         </section>
 
         @if ($story?->body)
-            <section class="about-story">
+            <section class="about-story home-reveal">
                 <img
                     src="{{ $storyImg }}"
                     alt=""
@@ -49,7 +49,7 @@
         @endif
 
         @if ($values && $valueItems !== [])
-            <section class="about-awards">
+            <section class="about-awards home-reveal">
                 <h2 class="about-awards__title">{{ $values->title }}</h2>
                 <div class="about-awards__grid">
                     <div class="about-awards__art">
@@ -98,7 +98,7 @@
             </div>
         @endif
 
-        <section class="about-closing">
+        <section class="about-closing home-reveal">
             <div class="about-closing__media">
                 <img
                     src="{{ $closeImg }}"

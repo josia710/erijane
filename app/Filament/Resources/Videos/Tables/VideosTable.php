@@ -26,6 +26,7 @@ class VideosTable
                 TextColumn::make('category')->badge(),
                 TextColumn::make('duration'),
                 TextColumn::make('date_label')->label('Date'),
+                TextColumn::make('external_url')->label('YouTube')->url(fn ($record) => $record->external_url, true)->openUrlInNewTab()->toggleable(),
                 TextColumn::make('published_at')->dateTime()->sortable(),
             ])
             ->defaultSort('sort')

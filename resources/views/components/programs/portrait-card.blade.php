@@ -7,6 +7,9 @@
         @if ($program['badge'])
             <span class="program-new">{{ $program['badge'] }}</span>
         @endif
+        @if (in_array($program['slug'], session()->get('completed_programs', []), true))
+            <span class="absolute right-2 top-2 z-10 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand text-xs font-bold text-white" title="Completed">✓</span>
+        @endif
         <img
             src="{{ \App\Support\Media::url($program['image'] ?? null) }}"
             alt="{{ \App\Support\Media::alt($program['title'] ?? null, 'Program') }}"

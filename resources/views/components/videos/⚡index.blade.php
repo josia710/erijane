@@ -15,6 +15,8 @@ new class extends Component
 
     public bool $filtersOpen = false;
 
+    public int $latestLimit = 3;
+
     public array $draftFocus = [];
 
     public array $draftType = [];
@@ -60,6 +62,7 @@ new class extends Component
         $this->duration = $this->draftDuration;
         $this->equipment = $this->draftEquipment;
         $this->filtersOpen = false;
+        $this->latestLimit = 3;
     }
 
     public function cancelFilters(): void
@@ -89,6 +92,12 @@ new class extends Component
     public function selectCollection(string $key): void
     {
         $this->collection = $key === '' ? 'all' : $key;
+        $this->latestLimit = 3;
+    }
+
+    public function loadMoreLatest(): void
+    {
+        $this->latestLimit += 6;
     }
 
     public function hasActiveFilters(): bool
@@ -217,10 +226,10 @@ new class extends Component
                         class="programs-search__input"
                     >
                 </label>
-                <span class="videos-fav" title="Sign in to save favorites">
+                <a href="{{ route('login') }}" class="videos-fav transition hover:text-ink" title="Sign in to save favorites">
                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.6-7 10-7 10z"/></svg>
                     <span class="videos-fav__label">Favorites</span>
-                </span>
+                </a>
                 <button
                     type="button"
                     class="programs-filters-btn {{ $filtersOpen || $this->hasActiveFilters() ? 'is-open' : '' }}"
@@ -360,7 +369,8 @@ new class extends Component
             @if ($showLatest && $topLatest)
                 @php
                     $featured = $topLatest['items']->first();
-                    $side = $topLatest['items']->slice(1, 2)->values();
+                    $side = $topLatest['items']->slice(1, $latestLimit - 1)->values();
+                    $latestTotal = $topLatest['items']->count();
                 @endphp
                 <section>
                     <div class="programs-row-head">
@@ -378,8 +388,9 @@ new class extends Component
                             </div>
                         @endforeach
                     </div>
-                    <p class="videos-load-more" aria-disabled="true">Load More Latest Workouts</p>
-                </section>
+                    @if ($latestTotal > $latestLimit)
+                        <button type="button" class="videos-load-more w-full cursor-pointer transition hover:border-ink hover:text-ink" wire:click="loadMoreLatest">Load More Latest Workouts</button>
+                    @endif
             @endif
 
             @foreach ($restRows as $row)

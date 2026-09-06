@@ -12,11 +12,13 @@ class CatalogSeeder extends Seeder
 {
     public function run(): void
     {
+        $this->call(VideoCategorySeeder::class);
+
         $catalog = require database_path('data/catalog.php');
         $now = now();
 
         foreach ($catalog['programs'] ?? [] as $i => $row) {
-            Program::query()->updateOrCreate(
+            Program::query()->withTrashed()->updateOrCreate(
                 ['slug' => $row['slug']],
                 [
                     'title' => $row['title'],
@@ -33,7 +35,7 @@ class CatalogSeeder extends Seeder
         }
 
         foreach ($catalog['videos'] ?? [] as $i => $row) {
-            Video::query()->updateOrCreate(
+            Video::query()->withTrashed()->updateOrCreate(
                 ['slug' => $row['slug']],
                 [
                     'title' => $row['title'],
@@ -41,6 +43,7 @@ class CatalogSeeder extends Seeder
                     'duration' => $row['duration'] ?? null,
                     'category' => $row['category'] ?? null,
                     'image' => $row['image'] ?? null,
+                    'external_url' => $row['external_url'] ?? null,
                     'sort' => $i,
                     'published_at' => $now,
                 ]
@@ -48,7 +51,7 @@ class CatalogSeeder extends Seeder
         }
 
         foreach ($catalog['recipes'] ?? [] as $i => $row) {
-            Recipe::query()->updateOrCreate(
+            Recipe::query()->withTrashed()->updateOrCreate(
                 ['slug' => $row['slug']],
                 [
                     'title' => $row['title'],
@@ -63,7 +66,7 @@ class CatalogSeeder extends Seeder
         }
 
         foreach ($catalog['store'] ?? [] as $i => $row) {
-            Product::query()->updateOrCreate(
+            Product::query()->withTrashed()->updateOrCreate(
                 ['slug' => $row['slug']],
                 [
                     'title' => $row['title'],

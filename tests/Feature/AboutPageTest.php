@@ -22,7 +22,7 @@ class AboutPageTest extends TestCase
     {
         $this->get('/about')
             ->assertOk()
-            ->assertSee('class="about-hero"', false)
+            ->assertSee('about-hero', false)
             ->assertSee('Erijane')
             ->assertSee('Affordable fitness apparel')
             ->assertSee('rickets-affected', false)

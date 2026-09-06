@@ -50,6 +50,19 @@
                     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
                 });
             }
+
+            document.querySelectorAll('[data-password-toggle]').forEach((toggle) => {
+                toggle.addEventListener('click', () => {
+                    const input = document.getElementById(toggle.getAttribute('data-password-toggle'));
+                    if (!input) {
+                        return;
+                    }
+                    const show = input.type === 'password';
+                    input.type = show ? 'text' : 'password';
+                    toggle.textContent = show ? 'Hide' : 'Show';
+                    toggle.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+                });
+            });
         });
     </script>
 </body>

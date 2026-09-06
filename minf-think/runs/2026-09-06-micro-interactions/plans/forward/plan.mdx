@@ -1,0 +1,36 @@
+# Forward plan — micro-interaction parity audit
+
+## Goal
+Audit 7 live pages, ship micro-interaction improvements with Apple motion craft.
+
+## Stack
+Must: apple-design, chloeting-design (patterns only), emil-design-eng,
+impeccable, layers-surface, laravel-best-practices, tdd.
+Rules: tokens only, Manrope-only, catalog-only store, keep IA, Embla only.
+
+## Sequence
+1. W0 motion primitives: press feedback (:active scale), hover lifts,
+   reveal-on-scroll (respect reduced-motion), Embla arrows+dots presets.
+   Verify: visual check home.
+2. W1 home + programs (+ show): rails snap/arrows, card hover overlays,
+   schedule accordion + related rail on show.
+3. W2 videos + recipes (+ show): play overlay, Load More real paging,
+   ingredients/steps blocks on recipe show.
+4. W3 store + community + about + auth: quick-add hover, gallery thumbs,
+   thread view polish, password show/hide, OAuth/reset states.
+5. Gates: review-animations on motion diff, jsm-review, RouteSmokeTest,
+   per-page side-by-side. Update 09-progress-tracker + ui-registry.
+
+## Lanes
+| Step | Lane |
+|------|------|
+| W0–W3 implement | cursor |
+| Tests/smoke | claude-code (sonnet) |
+| Review | both |
+
+## Done-when
+RouteSmokeTest exits 0. Side-by-side checklist passes all 7 pages.
+No raw hex in new Blade/Livewire.
+
+## Open
+q1 wave order, q2 dummy wiring depth — answer at approval.

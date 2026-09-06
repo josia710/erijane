@@ -17,6 +17,18 @@ Route::get('/programs/{program:slug}', function (Program $program) {
     return view('programs.show', compact('program'));
 })->name('programs.show');
 
+Route::post('/programs/{program:slug}/complete', function (Program $program) {
+    $done = session()->get('completed_programs', []);
+    if (in_array($program->slug, $done, true)) {
+        $done = array_values(array_diff($done, [$program->slug]));
+    } else {
+        $done[] = $program->slug;
+    }
+    session()->put('completed_programs', $done);
+
+    return redirect()->route('programs.show', $program);
+})->name('programs.complete');
+
 Route::view('/videos', 'videos.index')->name('videos');
 Route::get('/videos/{video:slug}', function (Video $video) {
     abort_unless($video->published_at !== null && $video->published_at <= now(), 404);

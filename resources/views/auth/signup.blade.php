@@ -34,10 +34,11 @@
                 <input id="email" name="email" type="email" value="{{ old('email') }}" required
                     class="auth-input" placeholder="Email">
             </div>
-            <div>
+            <div class="relative">
                 <label class="sr-only" for="password">Password</label>
                 <input id="password" name="password" type="password" required
-                    class="auth-input" placeholder="Password">
+                    class="auth-input pr-12" placeholder="Password">
+                <button type="button" data-password-toggle="password" class="absolute inset-y-0 right-0 px-4 text-xs font-semibold text-muted transition hover:text-ink" aria-label="Show password">Show</button>
             </div>
             <div>
                 <label class="sr-only" for="password_confirmation">Re-enter Password</label>

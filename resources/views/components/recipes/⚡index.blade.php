@@ -15,6 +15,8 @@ new class extends Component
 
     public bool $filtersOpen = false;
 
+    public int $latestLimit = 2;
+
     public array $draftCourse = [];
 
     public array $draftConvenience = [];
@@ -60,6 +62,7 @@ new class extends Component
         $this->dietary = $this->draftDietary;
         $this->time = $this->draftTime;
         $this->filtersOpen = false;
+        $this->latestLimit = 2;
     }
 
     public function cancelFilters(): void
@@ -89,6 +92,12 @@ new class extends Component
     public function selectCollection(string $key): void
     {
         $this->collection = $key === '' ? 'all' : $key;
+        $this->latestLimit = 2;
+    }
+
+    public function loadMoreLatest(): void
+    {
+        $this->latestLimit += 4;
     }
 
     public function hasActiveFilters(): bool
@@ -237,10 +246,10 @@ new class extends Component
                         class="programs-search__input"
                     >
                 </label>
-                <span class="videos-fav" title="Sign in to save recipes">
+                <a href="{{ route('login') }}" class="videos-fav transition hover:text-ink" title="Sign in to save recipes">
                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.6-7 10-7 10z"/></svg>
                     <span class="videos-fav__label">Saved Recipes</span>
-                </span>
+                </a>
                 <button
                     type="button"
                     class="programs-filters-btn {{ $filtersOpen || $this->hasActiveFilters() ? 'is-open' : '' }}"
@@ -369,7 +378,8 @@ new class extends Component
             @if ($showLatest && $topLatest)
                 @php
                     $featured = $topLatest['items']->first();
-                    $side = $topLatest['items']->slice(1, 1)->first();
+                    $side = $topLatest['items']->slice(1, $latestLimit - 1)->values();
+                    $latestTotal = $topLatest['items']->count();
                 @endphp
                 <section>
                     <div class="programs-row-head">
@@ -381,13 +391,15 @@ new class extends Component
                         @if ($featured)
                             <x-recipes.portrait-card :recipe="$featured" :featured="true" />
                         @endif
-                        @if ($side)
+                        @foreach ($side as $sideRecipe)
                             <div class="max-lg:hidden">
-                                <x-recipes.portrait-card :recipe="$side" />
+                                <x-recipes.portrait-card :recipe="$sideRecipe" />
                             </div>
-                        @endif
+                        @endforeach
                     </div>
-                    <p class="videos-load-more" aria-disabled="true">Load More Latest Recipes</p>
+                    @if ($latestTotal > $latestLimit)
+                        <button type="button" class="videos-load-more w-full cursor-pointer transition hover:border-ink hover:text-ink" wire:click="loadMoreLatest">Load More Latest Recipes</button>
+                    @endif
                 </section>
             @endif
 

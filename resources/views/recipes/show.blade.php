@@ -24,7 +24,48 @@
                 <li>Cook according to your preferred method.</li>
                 <li>Plate and enjoy after your workout.</li>
             </ol>
+            <div class="mt-6 flex flex-wrap items-center gap-3">
+                <a href="{{ route('signup') }}" class="btn-pill">Save Recipe</a>
+                <a href="{{ route('recipes') }}" class="btn-outline-pill">More Recipes</a>
+            </div>
         </div>
     </div>
+
+    @php
+        $relatedRecipes = \App\Models\Recipe::query()
+            ->published()
+            ->where('id', '!=', $recipe['id'])
+            ->when($recipe['category'], fn ($q) => $q->where('category', $recipe['category']))
+            ->orderBy('sort')
+            ->take(4)
+            ->get();
+        if ($relatedRecipes->count() < 4) {
+            $relatedRecipes = \App\Models\Recipe::query()
+                ->published()
+                ->where('id', '!=', $recipe['id'])
+                ->orderBy('sort')
+                ->take(4)
+                ->get();
+        }
+    @endphp
+    @if ($relatedRecipes->isNotEmpty())
+        <section class="mt-16">
+            <div class="programs-row-head">
+                <h2 class="programs-h2">Related Recipes</h2>
+                <a href="{{ route('recipes') }}" class="programs-view-all max-lg:hidden">View All</a>
+                <a href="{{ route('recipes') }}" class="programs-view-all-link lg:hidden">View All</a>
+            </div>
+            <div class="recipes-rail mt-5 lg:hidden">
+                @foreach ($relatedRecipes as $rel)
+                    <x-recipes.portrait-card :recipe="$rel" />
+                @endforeach
+            </div>
+            <div class="recipes-rail mt-5 max-lg:hidden">
+                @foreach ($relatedRecipes as $rel)
+                    <x-recipes.portrait-card :recipe="$rel" />
+                @endforeach
+            </div>
+        </section>
+    @endif
 </div>
 @endsection

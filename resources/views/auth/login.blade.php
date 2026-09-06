@@ -28,10 +28,11 @@
                 <input id="email" name="email" type="email" value="{{ old('email') }}" required autofocus
                     class="auth-input" placeholder="E-mail">
             </div>
-            <div>
+            <div class="relative">
                 <label class="sr-only" for="password">Password</label>
                 <input id="password" name="password" type="password" required
-                    class="auth-input" placeholder="Password">
+                    class="auth-input pr-12" placeholder="Password">
+                <button type="button" data-password-toggle="password" class="absolute inset-y-0 right-0 px-4 text-xs font-semibold text-muted transition hover:text-ink" aria-label="Show password">Show</button>
             </div>
             <div class="flex flex-wrap items-center justify-between gap-3 text-sm">
                 <label class="flex items-center gap-2 text-muted">

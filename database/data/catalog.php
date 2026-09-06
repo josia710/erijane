@@ -74,6 +74,15 @@ return [
         ['slug' => 'hiit-cardio', 'title' => 'HIIT Cardio Workout', 'date' => '12th Jun 26', 'duration' => '18 min', 'category' => 'Cardio', 'image' => 'images/chloe/videos/full-body-pilates.jpeg'],
         ['slug' => 'lower-body', 'title' => 'Lower Body Strength', 'date' => '8th Jun 26', 'duration' => '30 min', 'category' => 'Lower Body', 'image' => 'images/chloe/videos/abs-booty.jpeg'],
         ['slug' => 'stretch', 'title' => 'Full Body Stretch', 'date' => '3rd Jun 26', 'duration' => '12 min', 'category' => 'Recovery', 'image' => 'images/chloe/videos/pilates-hiit.jpeg'],
+        ['slug' => 'calorie-killer-hiit', 'title' => 'Calorie Killer HIIT', 'category' => 'Cardio', 'external_url' => 'https://youtu.be/y7RtTC2BhlY'],
+        ['slug' => 'hourglass-figure', 'title' => 'Hourglass Figure Workout', 'category' => 'Lower Body', 'external_url' => 'https://youtu.be/MULv8HQHUSs'],
+        ['slug' => 'seven-minute-hiit', 'title' => '7 Minute Full Body HIIT', 'duration' => '7 min', 'category' => 'Cardio', 'external_url' => 'https://youtu.be/HX7X1o2O9Uw'],
+        ['slug' => 'arm-back-fat-burn', 'title' => 'Arm & Back Fat Burn', 'duration' => '10 min', 'category' => 'Upper Body', 'external_url' => 'https://youtu.be/LNgqZGPaXSw'],
+        ['slug' => 'hiit-no-equipment-4', 'title' => 'HIIT No Equipment No. 4', 'category' => 'Cardio', 'external_url' => 'https://youtu.be/q1aJwrLBtbo'],
+        ['slug' => 'thirty-min-fat-burn', 'title' => '30 Min Fat Burn HIIT', 'duration' => '30 min', 'category' => 'Cardio', 'external_url' => 'https://youtu.be/27CxCBvLp10'],
+        ['slug' => 'twenty-min-hiit', 'title' => '20 Min HIIT No Noise', 'duration' => '20 min', 'category' => 'Cardio', 'external_url' => 'https://youtu.be/eJckDmzdX6A'],
+        ['slug' => 'flat-stomach-abs', 'title' => 'Flat Stomach & Abs', 'category' => 'Abs', 'external_url' => 'https://youtu.be/JkvJ1lmLzHo'],
+        ['slug' => 'wake-your-booty', 'title' => 'Wake Your Booty', 'category' => 'Lower Body', 'external_url' => 'https://youtu.be/G9I-KN6o1lM'],
     ],
 
     'recipes' => [

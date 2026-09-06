@@ -22,10 +22,11 @@
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         @foreach ($programs as $program)
             <a href="{{ route('programs.show', $program['slug']) }}" class="group cursor-pointer">
-                <div class="overflow-hidden rounded-3xl card-tone-{{ $program['tone'] }}">
+                <div class="relative overflow-hidden rounded-3xl card-tone-{{ $program['tone'] }}">
                     <div class="h-72 overflow-hidden">
                         <img src="{{ \App\Support\Media::url($program['image'] ?? null) }}" alt="{{ \App\Support\Media::alt($program['title'] ?? null, 'Program') }}" class="h-full w-full object-cover object-top transition duration-200 group-hover:scale-[1.03]">
                     </div>
+                    <span class="pointer-events-none absolute inset-x-0 bottom-4 mx-auto hidden w-fit rounded-full border border-ink bg-white px-4 py-2 text-sm text-ink group-hover:block">View Program</span>
                 </div>
                 <div class="mt-3 flex items-center gap-2">
                     @if ($program['badge'])
@@ -44,6 +45,14 @@
     <div class="site-container mb-8 flex flex-wrap items-end justify-between gap-4">
         <h2 id="videos-heading" class="section-title">Recent Workout Videos</h2>
         <div class="flex flex-wrap items-center gap-3">
+            <div class="flex items-center gap-2" data-home-nav>
+                <button type="button" class="carousel-btn" data-home-prev aria-label="Previous videos">
+                    <svg class="ui-icon ui-icon--chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg>
+                </button>
+                <button type="button" class="carousel-btn" data-home-next aria-label="Next videos">
+                    <svg class="ui-icon ui-icon--chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+                </button>
+            </div>
             <button
                 type="button"
                 class="btn-ghost"
@@ -74,7 +83,7 @@
                                 <img
                                     src="{{ \App\Support\Media::url($video['image'] ?? null) }}"
                                     alt="{{ \App\Support\Media::alt($video['title'] ?? null, 'Workout video') }}"
-                                    class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+                                    class="h-full w-full object-cover transition duration-300"
                                     width="640"
                                     height="360"
                                 >
@@ -88,6 +97,7 @@
                 @endforeach
             </div>
         </div>
+        <div class="carousel-dots mt-6" data-home-dots aria-hidden="true"></div>
     </div>
 </section>
 
@@ -96,6 +106,14 @@
     <div class="site-container mb-8 flex flex-wrap items-end justify-between gap-4">
         <h2 id="merch-heading" class="section-title">Merch</h2>
         <div class="flex flex-wrap items-center gap-3">
+            <div class="flex items-center gap-2" data-home-nav>
+                <button type="button" class="carousel-btn" data-home-prev aria-label="Previous products">
+                    <svg class="ui-icon ui-icon--chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg>
+                </button>
+                <button type="button" class="carousel-btn" data-home-next aria-label="Next products">
+                    <svg class="ui-icon ui-icon--chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+                </button>
+            </div>
             <button
                 type="button"
                 class="btn-ghost"
@@ -128,6 +146,7 @@
                 @endforeach
             </div>
         </div>
+        <div class="carousel-dots mt-6" data-home-dots aria-hidden="true"></div>
     </div>
 </section>
 

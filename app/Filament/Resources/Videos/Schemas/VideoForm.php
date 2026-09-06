@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Videos\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -17,7 +18,10 @@ class VideoForm
                 TextInput::make('slug')->required()->unique(ignoreRecord: true)->maxLength(255),
                 TextInput::make('date_label')->label('Date label')->maxLength(64),
                 TextInput::make('duration')->maxLength(32),
-                TextInput::make('category')->maxLength(64),
+                Select::make('category')
+                    ->options(fn () => \App\Models\VideoCategory::query()->orderBy('sort')->pluck('name', 'name'))
+                    ->searchable()
+                    ->native(false),
                 TextInput::make('external_url')->url()->maxLength(255),
                 FileUpload::make('image')
                     ->image()

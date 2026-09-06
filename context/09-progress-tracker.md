@@ -3,8 +3,8 @@
 Living checklist. Update after every feature. Agents read this early each session.
 
 ## Now
-- Phase: 4 complete — listing/auth/community hybrid parity wave
-- Active feature: none
+- Phase: 5 in progress — micro-interaction parity audit (mega-minf Lane C, plan `minf-think/runs/2026-09-06-micro-interactions/`)
+- Active feature: W0 motion primitives (done); next W1 home + programs
 - Blockers: none
 
 ## Phase 4
@@ -67,3 +67,6 @@ Living checklist. Update after every feature. Agents read this early each sessio
 | 2026-08-30 | Hero collage banner → Summer Shred phone asset (`chloeting-banner.e2207dc5.png` 873×1510) | Hard-refresh `/` if cached |
 | 2026-08-30 | Banner black keyed to PNG alpha (transparent outside phone) | Hard-refresh collage |
 | 2026-08-30 | Banner swapped to ChatGPT Summer Shred pop-out (transparent black) | Hard-refresh `/` |
+| 2026-09-06 | W9 player fixes: youtube.com embed (nocookie sign-in wall), minimize button, external_url column in admin table | Side-by-side vs live per page; commit/PR when asked |
+| 2026-09-06 | W10 iframe sign-in diagnosis: all 9 oEmbed-200 embeddable; wall is third-party cookie partitioning + under-player fallback note | Tell me the video ID if a wall persists with cookies allowed |
+| 2026-09-06 | W11 video categories in backend: table + CRUD resource, video form dropdown, trashed-safe reseed | Commit/PR when asked |
