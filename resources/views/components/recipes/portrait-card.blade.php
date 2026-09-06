@@ -5,46 +5,56 @@
 
 @php
     $tags = \App\Support\RecipeListing::dietTags($recipe);
+    $slug = $recipe['slug'];
 @endphp
 
-<a href="{{ route('recipes.show', $recipe['slug']) }}" class="{{ $featured ? 'recipes-featured group' : 'recipes-card group' }}">
+<div class="{{ $featured ? 'recipes-featured group' : 'recipes-card group' }}" x-data="{ hover: 0 }">
     <div class="{{ $featured ? 'recipes-featured__thumb' : 'recipes-card__thumb' }}">
-        <img
-            src="{{ \App\Support\Media::url($recipe['image'] ?? null) }}"
-            alt="{{ \App\Support\Media::alt($recipe['title'] ?? null, 'Recipe') }}"
-            loading="{{ $featured ? 'eager' : 'lazy' }}"
-        >
-        @if (! $featured)
-            <span class="recipes-overlay">
-                <span class="recipes-stars" aria-hidden="true">
-                    @for ($i = 0; $i < 5; $i++)
-                        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3.2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.8 7.2 18.1l.9-5.4L4.2 8.9l5.4-.8L12 3.2z"/></svg>
-                    @endfor
-                </span>
-                <x-recipes.action-icons />
-            </span>
-        @endif
+        <a href="{{ route('recipes.show', $slug) }}" class="block h-full w-full" aria-label="{{ $recipe['title'] }}">
+            <img
+                src="{{ \App\Support\Media::url($recipe['image'] ?? null) }}"
+                alt="{{ \App\Support\Media::alt($recipe['title'] ?? null, 'Recipe') }}"
+                loading="{{ $featured ? 'eager' : 'lazy' }}"
+                onload="this.classList.add('is-loaded')"
+            >
+        </a>
         @if ($tags !== [])
-            <div class="recipes-tags">
+            <div class="recipes-tags" aria-label="Dietary tags">
                 @foreach ($tags as $tag)
-                    <span class="recipes-tag" title="{{ $tag['label'] }}">{{ $tag['code'] }}</span>
+                    <span class="recipes-tag" aria-label="{{ $tag['label'] }}"><span class="recipes-tag__code" aria-hidden="true">{{ $tag['code'] }}</span><span class="recipes-tag__full" aria-hidden="true">{{ $tag['label'] }}</span></span>
                 @endforeach
             </div>
         @endif
     </div>
     <div class="{{ $featured ? 'recipes-featured__body' : 'recipes-card__body' }}">
-        <h3 class="{{ $featured ? 'recipes-featured__title' : 'recipes-card__title' }}">{{ $recipe['title'] }}</h3>
+        <a href="{{ route('recipes.show', $slug) }}" class="recipes-card__link">
+            <h3 class="{{ $featured ? 'recipes-featured__title' : 'recipes-card__title' }}">{{ $recipe['title'] }}</h3>
+        </a>
         @if ($featured)
-            <span class="recipes-rating-chip" aria-hidden="true">
-                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3.2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.8 7.2 18.1l.9-5.4L4.2 8.9l5.4-.8L12 3.2z"/></svg>
-            </span>
-            <div class="recipes-featured__cta">
-                <span class="recipes-view-recipe">View Recipe</span>
-                <x-recipes.action-icons />
+            <div class="recipes-featured__rate" role="group" aria-label="Rate this recipe">
+                <x-recipes.stars :slug="$slug" />
+                <span class="recipes-your-rating" x-show="$store.recipes.rating(@js($slug)) > 0" x-cloak>
+                    You rated <span x-text="$store.recipes.rating(@js($slug))"></span>/5
+                </span>
             </div>
-        @endif
-        @if (! $featured)
+            <div class="recipes-featured__cta">
+                <a href="{{ route('recipes.show', $slug) }}" class="recipes-view-recipe">View Recipe</a>
+                <x-recipes.action-icons :slug="$slug" />
+            </div>
+        @else
+            <div class="recipes-actions-row">
+                <span class="recipes-rating-pill">
+                    <x-recipes.stars :slug="$slug" />
+                    <span
+                        class="recipes-rating-value"
+                        x-show="$store.recipes.rating(@js($slug)) > 0"
+                        x-cloak
+                        x-text="($store.recipes.rating(@js($slug))).toFixed(1)"
+                    ></span>
+                </span>
+                <x-recipes.action-icons :slug="$slug" />
+            </div>
             <p class="recipes-card__time lg:hidden">{{ $recipe['time'] }}</p>
         @endif
     </div>
-</a>
+</div>

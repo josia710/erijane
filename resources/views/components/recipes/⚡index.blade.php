@@ -15,6 +15,10 @@ new class extends Component
 
     public bool $filtersOpen = false;
 
+    public bool $savedOnly = false;
+
+    public array $savedSlugs = [];
+
     public int $latestLimit = 2;
 
     public array $draftCourse = [];
@@ -41,6 +45,12 @@ new class extends Component
 
     #[Url]
     public array $time = [];
+
+    public function toggleSavedOnly(): void
+    {
+        $this->savedOnly = ! $this->savedOnly;
+        $this->latestLimit = 2;
+    }
 
     public function toggleFilters(): void
     {
@@ -87,6 +97,7 @@ new class extends Component
         $this->preference = [];
         $this->dietary = [];
         $this->time = [];
+        $this->savedOnly = false;
     }
 
     public function selectCollection(string $key): void
@@ -106,7 +117,8 @@ new class extends Component
             || $this->convenience !== []
             || $this->preference !== []
             || $this->dietary !== []
-            || $this->time !== [];
+            || $this->time !== []
+            || $this->savedOnly;
     }
 
     public function hasDraftFilters(): bool
@@ -126,6 +138,11 @@ new class extends Component
         if ($this->q !== '') {
             $needle = mb_strtolower($this->q);
             $items = $items->filter(fn (Recipe $recipe) => str_contains(mb_strtolower((string) $recipe->title), $needle));
+        }
+
+        if ($this->savedOnly) {
+            $slugs = $this->savedSlugs;
+            $items = $slugs === [] ? collect() : $items->filter(fn (Recipe $recipe) => in_array($recipe->slug, $slugs, true))->values();
         }
 
         $items = $items->filter(fn (Recipe $recipe) => RecipeListing::matchesFilters(
@@ -246,10 +263,17 @@ new class extends Component
                         class="programs-search__input"
                     >
                 </label>
-                <a href="{{ route('login') }}" class="videos-fav transition hover:text-ink" title="Sign in to save recipes">
-                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.6-7 10-7 10z"/></svg>
+                <button
+                    type="button"
+                    class="videos-fav transition hover:text-ink {{ $savedOnly ? 'is-open' : '' }}"
+                    title="Show only your saved recipes"
+                    aria-pressed="{{ $savedOnly ? 'true' : 'false' }}"
+                    @click="$wire.set('savedSlugs', $store.recipes.saved); $wire.toggleSavedOnly()"
+                >
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="{{ $savedOnly ? 'currentColor' : 'none' }}" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.6-7 10-7 10z"/></svg>
                     <span class="videos-fav__label">Saved Recipes</span>
-                </a>
+                    <span class="videos-fav__count" x-text="$store.recipes.saved.length" x-show="$store.recipes.saved.length > 0" x-cloak></span>
+                </button>
                 <button
                     type="button"
                     class="programs-filters-btn {{ $filtersOpen || $this->hasActiveFilters() ? 'is-open' : '' }}"

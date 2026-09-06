@@ -131,7 +131,7 @@ final class RecipeListing
     }
 
     /**
-     * @return list<array{code: string, label: string}>
+     * @return list<array{code: string, label: string, key: string}>
      */
     public static function dietTags(Recipe $recipe): array
     {
@@ -139,18 +139,18 @@ final class RecipeListing
         $tags = [];
 
         foreach ([
-            'High Protein' => ['HP', 'High Protein'],
-            'Low Carb' => ['LC', 'Low Carb'],
-            'Dairy Free' => ['DF', 'Dairy Free'],
-            'Vegetarian' => ['Vg', 'Vegetarian'],
-        ] as $category => [$code, $label]) {
+            'High Protein' => ['HP', 'High Protein', 'high-protein'],
+            'Low Carb' => ['LC', 'Low Carb', 'low-carb'],
+            'Dairy Free' => ['DF', 'Dairy Free', 'dairy-free'],
+            'Vegetarian' => ['Vg', 'Vegetarian', 'vegetarian'],
+        ] as $category => [$code, $label, $key]) {
             if ($recipe->category === $category) {
-                $tags[] = ['code' => $code, 'label' => $label];
+                $tags[] = ['code' => $code, 'label' => $label, 'key' => $key];
             }
         }
 
         if (str_contains($title, 'vegan')) {
-            $tags[] = ['code' => 'Vn', 'label' => 'Vegan'];
+            $tags[] = ['code' => 'Vn', 'label' => 'Vegan', 'key' => 'vegan'];
         }
 
         $seen = [];

@@ -40,6 +40,45 @@
 
     @livewireScripts
     <script>
+        document.addEventListener('alpine:init', () => {
+            const read = (key, fallback) => {
+                try {
+                    const raw = localStorage.getItem(key);
+                    return raw === null ? fallback : JSON.parse(raw);
+                } catch (e) {
+                    return fallback;
+                }
+            };
+            const write = (key, value) => {
+                try {
+                    localStorage.setItem(key, JSON.stringify(value));
+                } catch (e) {
+                    // Private mode etc. — interactions still work for this page view.
+                }
+            };
+            Alpine.store('recipes', {
+                liked: read('erijane.recipe.liked', []),
+                saved: read('erijane.recipe.saved', []),
+                ratings: read('erijane.recipe.ratings', {}),
+                isLiked(slug) { return this.liked.includes(slug); },
+                isSaved(slug) { return this.saved.includes(slug); },
+                rating(slug) { return this.ratings[slug] || 0; },
+                toggleLiked(slug) {
+                    this.liked = this.isLiked(slug) ? this.liked.filter((s) => s !== slug) : [...this.liked, slug];
+                    write('erijane.recipe.liked', this.liked);
+                },
+                toggleSaved(slug) {
+                    this.saved = this.isSaved(slug) ? this.saved.filter((s) => s !== slug) : [...this.saved, slug];
+                    write('erijane.recipe.saved', this.saved);
+                },
+                rate(slug, value) {
+                    this.ratings = { ...this.ratings, [slug]: value };
+                    write('erijane.recipe.ratings', this.ratings);
+                },
+            });
+        });
+    </script>
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
