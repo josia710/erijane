@@ -58,7 +58,8 @@
 
         .recipes-tag,
         .recipes-tag__full,
-        .recipes-tag__code {
+        .recipes-tag__code,
+        .recipes-stars__rest {
             transition: none !important;
         }
 
@@ -1010,12 +1011,12 @@
         @apply flex shrink-0 items-center gap-2;
     }
 
-    .recipes-actions-row {
-        @apply mt-2.5 flex items-center justify-between gap-2;
+    .recipes-card__overlay {
+        @apply pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 p-3;
     }
 
     .recipes-rating-pill {
-        @apply inline-flex w-fit items-center gap-1 rounded-full px-2 py-1.5;
+        @apply pointer-events-auto inline-flex w-fit items-center gap-1 rounded-full px-1.5 py-1.5;
         background-color: rgba(250, 250, 250, 0.6);
         border-radius: 36px;
         backdrop-filter: blur(4px);
@@ -1027,27 +1028,19 @@
     }
 
     .recipes-rating-value {
-        @apply ml-1 text-sm font-medium text-ink;
+        @apply ml-1 pr-1 text-sm font-medium text-ink;
     }
 
-    .recipes-actions-row .recipes-icon-btn {
-        @apply h-8 w-8 border-transparent;
+    .recipes-card__overlay .recipes-icon-btn {
+        @apply pointer-events-auto h-8 w-8 border-transparent;
         background-color: rgba(250, 250, 250, 0.6);
         border-radius: 36px;
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
     }
 
-    .recipes-actions-row .recipes-icon-btn:hover {
+    .recipes-card__overlay .recipes-icon-btn:hover {
         @apply bg-white;
-    }
-
-    .recipes-actions-row .recipes-icon-btn.is-active {
-        @apply border-ink bg-ink text-white;
-    }
-
-    .recipes-actions-row .recipes-heart-btn.is-liked {
-        @apply border-red-500 bg-red-500 text-white;
     }
 
     .recipes-stars {
@@ -1068,6 +1061,17 @@
 
     .recipes-star.is-on svg {
         @apply fill-amber-300;
+    }
+
+    .recipes-stars__rest {
+        @apply flex max-w-0 items-center gap-0.5 overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 ease-out;
+    }
+
+    .recipes-stars:hover .recipes-stars__rest,
+    .recipes-stars:focus-within .recipes-stars__rest,
+    .recipes-rating-pill:hover .recipes-stars__rest,
+    .recipes-rating-pill:focus-within .recipes-stars__rest {
+        @apply max-w-[120px] opacity-100;
     }
 
     .recipes-featured__rate {

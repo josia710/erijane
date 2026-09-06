@@ -18,6 +18,20 @@
                 onload="this.classList.add('is-loaded')"
             >
         </a>
+        @if (! $featured)
+            <div class="recipes-card__overlay">
+                <span class="recipes-rating-pill">
+                    <x-recipes.stars :slug="$slug" />
+                    <span
+                        class="recipes-rating-value"
+                        x-show="$store.recipes.rating(@js($slug)) > 0"
+                        x-cloak
+                        x-text="($store.recipes.rating(@js($slug))).toFixed(1)"
+                    ></span>
+                </span>
+                <x-recipes.action-icons :slug="$slug" />
+            </div>
+        @endif
         @if ($tags !== [])
             <div class="recipes-tags" aria-label="Dietary tags">
                 @foreach ($tags as $tag)
@@ -42,18 +56,6 @@
                 <x-recipes.action-icons :slug="$slug" />
             </div>
         @else
-            <div class="recipes-actions-row">
-                <span class="recipes-rating-pill">
-                    <x-recipes.stars :slug="$slug" />
-                    <span
-                        class="recipes-rating-value"
-                        x-show="$store.recipes.rating(@js($slug)) > 0"
-                        x-cloak
-                        x-text="($store.recipes.rating(@js($slug))).toFixed(1)"
-                    ></span>
-                </span>
-                <x-recipes.action-icons :slug="$slug" />
-            </div>
             <p class="recipes-card__time lg:hidden">{{ $recipe['time'] }}</p>
         @endif
     </div>
