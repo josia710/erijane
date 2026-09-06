@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Erijane — Modular Monolith",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "public-path",
+        "label": "Public request path",
+        "focus": [
+          "visitors",
+          "routes",
+          "livewire",
+          "models",
+          "db"
+        ],
+        "note": "Public Blade/Livewire render from Eloquent models."
+      },
+      {
+        "id": "staff-path",
+        "label": "Staff CMS path",
+        "focus": [
+          "editors",
+          "filament",
+          "models",
+          "storage"
+        ],
+        "note": "Filament CRUD with media upload to public disk."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "visitors",
+      "type": "external",
+      "label": "Visitors",
+      "sublabel": "Browser",
+      "pos": [
+        40,
+        300
+      ],
+      "size": [
+        120,
+        60
+      ]
+    },
+    {
+      "id": "editors",
+      "type": "external",
+      "label": "Staff",
+      "sublabel": "admin / editor",
+      "pos": [
+        40,
+        100
+      ],
+      "size": [
+        120,
+        64
+      ]
+    },
+    {
+      "id": "routes",
+      "type": "frontend",
+      "label": "Public routes",
+      "sublabel": "public pages",
+      "pos": [
+        250,
+        300
+      ],
+      "size": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": "livewire",
+      "type": "frontend",
+      "label": "Blade + Livewire 4",
+      "sublabel": "layouts + SFC",
+      "pos": [
+        470,
+        300
+      ],
+      "size": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": "filament",
+      "type": "backend",
+      "label": "Filament Admin",
+      "sublabel": "CRUD resources",
+      "pos": [
+        250,
+        100
+      ],
+      "size": [
+        140,
+        64
+      ]
+    },
+    {
+      "id": "laravel",
+      "type": "backend",
+      "label": "Laravel 13 HTTP",
+      "sublabel": "controllers + policies",
+      "pos": [
+        470,
+        100
+      ],
+      "size": [
+        140,
+        64
+      ]
+    },
+    {
+      "id": "models",
+      "type": "backend",
+      "label": "Eloquent Models",
+      "sublabel": "published scopes",
+      "pos": [
+        700,
+        200
+      ],
+      "size": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": "db",
+      "type": "database",
+      "label": "SQLite / MySQL",
+      "sublabel": "content tables",
+      "pos": [
+        920,
+        200
+      ],
+      "size": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": "storage",
+      "type": "cloud",
+      "label": "Public Disk",
+      "sublabel": "storage/app/public",
+      "pos": [
+        700,
+        420
+      ],
+      "size": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": "youtube",
+      "type": "external",
+      "label": "YouTube",
+      "sublabel": "video links",
+      "pos": [
+        920,
+        420
+      ],
+      "size": [
+        140,
+        60
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Laravel monolith",
+      "wraps": [
+        "routes",
+        "livewire",
+        "filament",
+        "laravel",
+        "models"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "v-routes",
+      "from": "visitors",
+      "to": "routes",
+      "label": "HTTPS"
+    },
+    {
+      "id": "r-lw",
+      "from": "routes",
+      "to": "livewire",
+      "label": "render"
+    },
+    {
+      "id": "lw-models",
+      "from": "livewire",
+      "to": "models",
+      "label": "query"
+    },
+    {
+      "id": "m-db",
+      "from": "models",
+      "to": "db",
+      "label": "SQL"
+    },
+    {
+      "id": "lw-storage",
+      "from": "livewire",
+      "to": "storage",
+      "label": "Storage::url()"
+    },
+    {
+      "id": "lw-yt",
+      "from": "livewire",
+      "to": "youtube",
+      "label": "embed links",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "bottom",
+      "via": [
+        [
+          540,
+          520
+        ],
+        [
+          990,
+          520
+        ]
+      ]
+    },
+    {
+      "id": "staff-fil",
+      "from": "editors",
+      "to": "filament",
+      "label": "session auth"
+    },
+    {
+      "id": "fil-models",
+      "from": "filament",
+      "to": "models",
+      "label": "CRUD"
+    },
+    {
+      "id": "fil-auth",
+      "from": "filament",
+      "to": "laravel",
+      "label": "canAccessPanel"
+    },
+    {
+      "id": "models-storage",
+      "from": "models",
+      "to": "storage",
+      "label": "media",
+      "labelAt": [
+        770,
+        274
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Public",
+      "items": [
+        "Chloe Ting IA routes stay unchanged",
+        "Catalog-only store, no payments"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "CMS",
+      "items": [
+        "Filament CRUD per content domain",
+        "Media on public disk via storage:link"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Data",
+      "items": [
+        "Eloquent scopes published",
+        "Roles admin editor member"
+      ]
+    }
+  ]
+}

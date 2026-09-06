@@ -68,12 +68,12 @@ return [
     ],
 
     'videos' => [
-        ['slug' => 'abs-hiit', 'title' => 'Abs HIIT Workout', 'date' => '24th Jun 26', 'duration' => '15 min', 'category' => 'Abs', 'image' => 'images/chloe/videos/abs-booty-live.webp'],
+        ['slug' => 'abs-hiit', 'title' => 'Abs HIIT Workout', 'date' => '24th Jun 26', 'duration' => '15 min', 'category' => 'Abs', 'image' => 'images/chloe/videos/abs-booty-live.jpeg'],
         ['slug' => 'full-body-burn', 'title' => 'Full Body Burn', 'date' => '22nd Jun 26', 'duration' => '25 min', 'category' => 'Full Body', 'image' => 'images/chloe/videos/full-body-pilates-live.jpeg'],
-        ['slug' => 'pilates-core', 'title' => 'Pilates Core Flow', 'date' => '17th Jun 26', 'duration' => '20 min', 'category' => 'Pilates', 'image' => 'images/chloe/videos/pilates-hiit-live.webp'],
+        ['slug' => 'pilates-core', 'title' => 'Pilates Core Flow', 'date' => '17th Jun 26', 'duration' => '20 min', 'category' => 'Pilates', 'image' => 'images/chloe/videos/pilates-hiit-live.jpeg'],
         ['slug' => 'hiit-cardio', 'title' => 'HIIT Cardio Workout', 'date' => '12th Jun 26', 'duration' => '18 min', 'category' => 'Cardio', 'image' => 'images/chloe/videos/full-body-pilates.jpeg'],
-        ['slug' => 'lower-body', 'title' => 'Lower Body Strength', 'date' => '8th Jun 26', 'duration' => '30 min', 'category' => 'Lower Body', 'image' => 'images/chloe/videos/abs-booty.webp'],
-        ['slug' => 'stretch', 'title' => 'Full Body Stretch', 'date' => '3rd Jun 26', 'duration' => '12 min', 'category' => 'Recovery', 'image' => 'images/chloe/videos/pilates-hiit.webp'],
+        ['slug' => 'lower-body', 'title' => 'Lower Body Strength', 'date' => '8th Jun 26', 'duration' => '30 min', 'category' => 'Lower Body', 'image' => 'images/chloe/videos/abs-booty.jpeg'],
+        ['slug' => 'stretch', 'title' => 'Full Body Stretch', 'date' => '3rd Jun 26', 'duration' => '12 min', 'category' => 'Recovery', 'image' => 'images/chloe/videos/pilates-hiit.jpeg'],
     ],
 
     'recipes' => [

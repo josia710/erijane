@@ -27,6 +27,8 @@ return [
         'train' => 'images/chloe/hero/train.ff560bfb.png',
         'connect' => 'images/chloe/hero/connect.44ddc83d.png',
         'performance' => 'images/chloe/hero/performance-audit.a8d696be.png',
+        'about_header' => 'images/chloe/hero/erijane-about-header.png',
+        'about_close' => 'images/chloe/hero/erijane-about-close.png',
     ],
 
     'community_features' => [

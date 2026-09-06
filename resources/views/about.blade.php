@@ -12,9 +12,9 @@
     $listSections = $sections->whereIn('section_key', ['mission', 'vision', 'impact'])->values();
     $valueItems = is_array($values?->meta['items'] ?? null) ? $values->meta['items'] : [];
     $assets = \App\Support\SiteContent::assets();
-    $heroImg = \App\Support\Media::url($assets['banner'] ?? 'images/chloe/hero/chloeting-banner.e2207dc5.png');
+    $heroImg = \App\Support\Media::url($assets['about_header'] ?? $assets['banner'] ?? 'images/chloe/hero/erijane-about-header.png');
     $storyImg = \App\Support\Media::url($assets['train'] ?? 'images/chloe/hero/train.ff560bfb.png');
-    $closeImg = \App\Support\Media::url($assets['performance'] ?? 'images/chloe/hero/performance-audit.a8d696be.png');
+    $closeImg = \App\Support\Media::url($assets['about_close'] ?? $assets['performance'] ?? 'images/chloe/hero/erijane-about-close.png');
 @endphp
 <div class="about-page">
     <div class="site-container">
